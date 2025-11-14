@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Subscription Successful</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(180deg, #0b1220, #111a2e);
+      color: #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .card {
+      background: linear-gradient(145deg, #1c2340, #232b4d);
+      border-radius: 20px;
+      padding: 40px 50px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      max-width: 480px;
+      width: 90%;
+      animation: fadeIn 0.8s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .checkmark {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background: #7c3aed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      animation: scaleIn 0.5s ease forwards;
+    }
+
+    .checkmark::after {
+      content: '';
+      width: 20px;
+      height: 40px;
+      border-left: 4px solid #fff;
+      border-bottom: 4px solid #fff;
+      transform: rotate(-45deg);
+      position: absolute;
+      top: 15px;
+      opacity: 0;
+      animation: drawCheck 0.5s ease forwards 0.5s;
+    }
+
+    @keyframes scaleIn {
+      0% { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes drawCheck {
+      0% { opacity: 0; height: 0; }
+      100% { opacity: 1; height: 40px; }
+    }
+
+    h1 {
+      color: #fff;
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #cbd5e1;
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 25px;
+      border-radius: 30px;
+      background: linear-gradient(90deg, #7c3aed, #3b82f6);
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="checkmark"></div>
+    <h1>Subscription Successful!</h1>
+    <p>
+      Thank you for subscribing to our newsletter.<br>
+      You will start receiving updates and latest news from us soon.
+    </p>
+    <a href="index.html" class="btn">Back to Home</a>
+  </div>
+
+  <script>
+    // Optional: Auto-redirect to home after 5 seconds
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 5000);
+  </script>
+</body>
+</html>
