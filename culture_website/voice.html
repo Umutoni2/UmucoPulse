@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Voices</title>
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuToggle = document.querySelector('.menu-toggle');
+      const nav = document.querySelector('.main-nav');
+      const backToTopBtn = document.querySelector('.back-to-top');
+      if (menuToggle && nav) {
+        menuToggle.addEventListener('click', function() {
+          nav.classList.toggle('active');
+        });
+      }
+      if (backToTopBtn) {
+        backToTopBtn.addEventListener('click', function() {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+    });
+  </script>
+</head>
+<body id="top">
+  <header>
+    <h1><img class="logo" src="assets/logo.jpg" alt="CulturePulse logo" />  UmucoPulse</h1>
+    <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#skills">Skills</a>
+      <a href="index.html#projects">Projects</a>
+      <a href="mission.html">Mission</a>
+      <a href="voice.html">Voice</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+  <main style="display: flex; flex-direction: column; gap: 30px;">
+    <h2>Voices of Our Culture</h2>
+    <img src="assets/poet.jpg" alt="Poet" />
+    <p>“I write to remember who we are.” Featured Poet
+      Writing, for me, is more than just putting words on paper; it is a way of keeping our identity alive. Every poem I create is a reflection of our history, our struggles, and our dreams as Rwandans. Through poetry, I try to capture the rhythm of our language, the wisdom in our proverbs, and the beauty of our everyday life.
+      When I write, I feel connected to those who came before me the storytellers, singers, and poets who used their voices to keep our culture strong. My goal is to continue that legacy by using poetry to remind others of where we come from and who we are. I believe that words have the power to heal, to unite, and to inspire.
+      In a world that is changing so quickly, I write so that our culture is not forgotten, so that our identity remains rooted in pride and resilience. Writing allows me to celebrate Rwanda, to share its beauty with others, and to remind every reader that our stories still matter.</p>
+    <p>Listen to stories, poems, and songs from our cultural contributors.</p>
+    <p>Our Voices collection is an evolving mosaic of lived experience. We feature elders sharing ancestral wisdom, youth experimenting with new forms, and community leaders bridging tradition and innovation. Each contribution is reviewed for consent, cultural sensitivity, and context so that the stories we host are honored and understood.</p>
+  
+    <h3>Featured Poet</h3>
+    <p>Through spoken word and written verse, our featured poet explores memory, migration, and belonging. Their latest cycle blends Kinyarwanda imagery with contemporary rhythms, inviting audiences to participate by echoing refrains learned from elders.</p>
+    <img src="assets/voices.jpeg" alt="Live poetry performance" />
+    <h3>Dance and Movement</h3>
+    <p>Traditional movement carries encoded knowledge, values, humor, and history expressed through rhythm. Our dance features showcase performers who study lineage while developing new choreographies for modern stages and classrooms.</p>
+    <img src="assets/dance.jpg" alt="Traditional dancers performing on stage" />
+    <h3>Stories and Song</h3>
+    <p>From lullabies to epic narratives, song and story are our cultural heartbeat. We record community performances and offer simple guides so families can preserve their own repertoires at home and contribute to the public archive when they choose.</p>
+    <img src="assets/music.jpg" alt="Musicians playing traditional instruments" />
+  </main>
+  <footer>
+    <form class="footer-contact-form" action="subscribe.html" method="post">
+      <h3>Subscribe to our newsletter</h3>
+      <label>
+        Email
+        <input type="email" name="footer-email" placeholder="you@example.com" required />
+      </label>
+      <input type="submit" value="Subscribe" />
+    </form>
+    <div class="footer-social">
+      <a href="https://www.linkedin.com/in/umutoni-rutaganira-sylvie-7468b7274/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.23 8.5h4.54V24H.23zM8.75 8.5h4.35v2.11h.06c.61-1.16 2.1-2.38 4.33-2.38 4.63 0 5.49 3.05 5.49 7V24h-4.73v-6.5c0-1.55-.03-3.55-2.17-3.55-2.17 0-2.5 1.7-2.5 3.44V24H8.75z"/>
+        </svg>
+      </a>
+      <a href="https://www.linkedin.com/in/umutoni-rutaganira-sylvie-7468b7274/" target="_blank" rel="noopener noreferrer" aria-label="Instagram profile">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M7 2C4.24 2 2 4.24 2 7v10c0 2.76 2.24 5 5 5h10c2.76 0 5-2.24 5-5V7c0-2.76-2.24-5-5-5H7zm0 2h10c1.67 0 3 1.33 3 3v10c0 1.67-1.33 3-3 3H7c-1.67 0-3-1.33-3-3V7c0-1.67 1.33-3 3-3zm9.25 2a1.25 1.25 0 100 2.5 1.25 1.25 0 000-2.5zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/>
+        </svg>
+      </a>
+    </div>
+    <p>&copy; 2025 UmucoPulse</p>
+  </footer>
+  <button class="back-to-top" type="button" aria-label="Back to top"></button>
+</body>
+</html>
