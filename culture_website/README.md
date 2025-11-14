@@ -44,10 +44,8 @@ The site uses modern CSS features (flex, grid, custom properties) and works best
 This project is shared for portfolio and personal use. Adapt it as needed for your cultural storytelling initiatives.
 
 ## Contact / Author
+**Author:** Umutoni Rutaganira Sylvie  
+**Email:** [s.umutonir@alustudent.com](mailto:s.umutonir@alustudent.com)  
+**GitHub:** [umutoni2](https://github.com/umutoni2)  
+**LinkedIn:** [Umutoni Rutaganira Sylvie](https://www.linkedin.com/in/umutoni-rutaganira-sylvie-7468b7274/)
 
-**Author:** Umutoni Rutaganira Sylvie
-**Email:** [[s.umutonir@alustudent.com](mailto:s.umutonir@alustudent.com)]
-**GitHub:** [https://github.com/umutoni2](umutoni2)
-**LinkedIn:** [https://www.linkedin.com/in/umutoni-rutaganira-sylvie-7468b7274/](UMUTONI RUTAGANIRA Sylvie)
-
----
