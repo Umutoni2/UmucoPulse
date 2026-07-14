@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>UmucoPulse</title>
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuToggle = document.querySelector('.menu-toggle');
+      const nav = document.querySelector('.main-nav');
+      const backToTopBtn = document.querySelector('.back-to-top');
+      if (menuToggle && nav) {
+        menuToggle.addEventListener('click', function() {
+          nav.classList.toggle('active');
+        });
+      }
+      if (backToTopBtn) {
+        backToTopBtn.addEventListener('click', function() {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+    });
+  </script>
+</head>
+<body id="top">
+  <header>
+    <h1><img class="logo" src="assets/logo.jpg" alt="CulturePulse logo" /> UmucoPulse</h1>
+    <button class="menu-toggle" aria-label="Toggle menu">☰</button>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="mission.html">Mission</a>
+      <a href="voice.html">Voice</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+  <main>
+    <section class="hero">
+      <h1 class="hero-headline">Hi, I’m Sylvie</h1>
+      <p class="hero-subtext">Cultural storyteller, workshop host, and lifelong learner sharing the heart of Rwanda with the world.</p>
+      <div class="hero-actions">
+        <a class="hero-cta" href="#about">Explore my journey</a>
+        <a class="hero-cta secondary" href="contact.html">Start a project</a>
+      </div>
+    </section>
+    
+  <div class="container">
+    <section id="about" class="about-section">
+      <img class="about-photo" src="assets/profile.jpg" alt="Portrait of Sylvie smiling" />
+      <div class="about-content">
+        <h2>About Me</h2>
+        <p>I am a Rwandan creative based in the Maurtius. My work blends performance, education, and community projects that celebrate our heritage. From hosting cultural storytelling sessions to producing short documentaries, I aim to keep our traditions vibrant and accessible.</p>
+        <p>When I’m not leading a workshop, you’ll find me recording oral histories with elders, writing poetry, or teaching young learners the steps of Intore dance. Culture is my compass,it guides the work I do and the connections I build.</p>
+        <p>My journey started by recording family histories and community songs with a simple phone. Today, I design digital archives, mentor youth teams, and coordinate cultural programs so every story has a place to live online.</p>
+        <ul class="about-highlights">
+          <li><strong>Current base:</strong> Maurtius & Rwanda</li>
+          <li><strong>Focus:</strong> Cultural education, storytelling, archive design</li>
+          <li><strong>Community:</strong> Workshops, artist mentorship, youth programs</li>
+        </ul>
+      </div>
+    </section>
+    <section id="skills" class="skills">
+  <h2>Skills &amp; Expertise</h2>
+
+  <!-- Technical Skills -->
+  <div class="skills-category">
+    <h3>Technical Skills</h3>
+    <table class="skills-table" border="1" cellpadding="5" cellspacing="0">
+      <thead>
+        <tr>
+          <th>No.</th>
+          <th>Skill / Language / Framework</th>
+          <th>Level</th>
+          <th>Rate</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>C++</td><td>Intermediate</td><td>3 / 5</td></tr>
+        <tr><td>2</td><td>Java</td><td>Intermediate</td><td>3 / 5</td></tr>
+        <tr><td>3</td><td>Python</td><td>Intermediate</td><td>3 / 5</td></tr>
+        <tr><td>4</td><td>C</td><td>Beginner</td><td>2 / 5</td></tr>
+        <tr><td>5</td><td>JavaScript</td><td>Beginner</td><td>2 / 5</td></tr>
+        <tr><td>6</td><td>HTML5</td><td>Advanced</td><td>4 / 5</td></tr>
+        <tr><td>7</td><td>CSS3</td><td>Advanced</td><td>4 / 5</td></tr>
+        <tr><td>8</td><td>Visual Basic</td><td>Professional</td><td>5 / 5</td></tr>
+        <tr><td>9</td><td>Database Management</td><td>Intermediate</td><td>3 / 5</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Other Skills -->
+  <div class="skills-category">
+    <h3>Other Skills</h3>
+    <table cellpadding="15" cellspacing="20"> <!-- More spacing between columns -->
+      <tr>
+        <td>
+          <ul>
+            <li>Storyteller</li>
+            <li>Listening</li>
+            <li>Event Planner</li>
+          </ul>
+        </td>
+        <td>
+          <ul>
+            <li>Cultural Education</li>
+            <li>Community Engagement</li>
+            <li>Workshop Facilitation</li>
+          </ul>
+        </td>
+        <td>
+          <ul>
+            <li>Oral History Documentation</li>
+            <li>Cultural Preservation</li>
+            <li>Performance Arts</li>
+          <td><ul><li>Digital Archiving</li></ul></td>  
+          </ul>
+        </td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+    <section id="projects" class="highlights">
+      <h2>Featured Projects</h2>
+      <div class="featured-list">
+        <article class="featured">
+          <img src="assets/workshops.jpg" alt="Workshop with students" />
+          <h4>Heritage Workshops</h4>
+          <p>Interactive sessions for schools and community centers that mix dance, storytelling, and language basics.</p>
+        </article>
+        <article class="featured">
+          <img src="assets/voices.jpeg" alt="Poets sharing stories" />
+          <h4>Voices Archive</h4>
+          <p>A growing audio and video collection preserving the memories and songs of the Rwandan diaspora.</p>
+        </article>
+        <article class="featured">
+          <img src="assets/music.jpg" alt="Musicians performing" />
+          <h4>Performances & Events</h4>
+          <p>Collaborative showcases celebrating traditional music with modern influences to inspire new audiences.</p>
+        </article>
+      </div>
+    </section>
+
+    
+<!-- 
+    <section class="contact-me" id="contact">
+      <h2>Let’s Collaborate</h2>
+      <p>If you would like to host a workshop, feature a story, or partner on an event, send me a message. I would love to connect.</p>
+      <form action="#" method="post">
+        <label>
+          Name
+          <input type="text" name="name" placeholder="Your name" required />
+        </label>
+        <label>
+          Email
+          <input type="email" name="email" placeholder="you@example.com" required />
+        </label>
+        <label>
+          Message
+          <textarea name="message" placeholder="Tell me about your project..." required></textarea>
+        </label>
+        <input type="submit" value="Send Message" />
+      </form>
+    </section> -->
+  </div>
+  </main>
+  <footer>
+    <form class="footer-contact-form" action="subscribe.html" method="post">
+      <h3>Subscribe to our newsletter</h3>
+      <label>
+        Email
+        <input type="email" name="footer-email" placeholder="you@example.com" required />
+      </label>
+      <input type="submit" value="Subscribe" />
+    </form>
+    <div class="footer-social">
+      <a href="https://www.linkedin.com/in/umutoni-rutaganira-sylvie-7468b7274/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.23 8.5h4.54V24H.23zM8.75 8.5h4.35v2.11h.06c.61-1.16 2.1-2.38 4.33-2.38 4.63 0 5.49 3.05 5.49 7V24h-4.73v-6.5c0-1.55-.03-3.55-2.17-3.55-2.17 0-2.5 1.7-2.5 3.44V24H8.75z"/>
+        </svg>
+      </a>
+      <a href="https://www.linkedin.com/in/umutoni-rutaganira-sylvie-7468b7274/" target="_blank" rel="noopener noreferrer" aria-label="Instagram profile">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M7 2C4.24 2 2 4.24 2 7v10c0 2.76 2.24 5 5 5h10c2.76 0 5-2.24 5-5V7c0-2.76-2.24-5-5-5H7zm0 2h10c1.67 0 3 1.33 3 3v10c0 1.67-1.33 3-3 3H7c-1.67 0-3-1.33-3-3V7c0-1.67 1.33-3 3-3zm9.25 2a1.25 1.25 0 100 2.5 1.25 1.25 0 000-2.5zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/>
+        </svg>
+      </a>
+    </div>
+    <p>&copy; 2025 UmucoPulse</p>
+  </footer>
+  <button class="back-to-top" type="button" aria-label="Back to top"></button>
+</body>
+</html>
