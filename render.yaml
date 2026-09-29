@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: umucopulse
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn run:app
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ADMIN_EMAIL
+        value: admin@umucopulse.org
+      - key: ADMIN_PASSWORD
+        value: Umuco123!
+      - key: PYTHON_VERSION
+        value: 3.12.0
