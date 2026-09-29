@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Contributor Dashboard | UmucoPulse</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar"><div class="container"><span data-i18n="topbar_umuco">Umuco means culture.</span><span data-i18n="topbar_actions">Preserve • Share • Learn • Connect</span></div></div>
+<header><div class="container nav"><a class="brand" href="index.html"><span class="brand-mark"></span>Umuco<em>Pulse</em></a><nav class="nav-links" data-nav></nav></div></header>
+<main>
+<section class="page-head"><div class="container">
+  <div class="eyebrow" data-i18n="dash_eyebrow">Contributor dashboard</div>
+  <h1 id="welcome">My UmucoPulse</h1>
+  <p class="lead" data-i18n="dash_lead">Build your cultural profile, follow review status, and respond to collaboration requests.</p>
+  <p class="help" id="dash-profile-state"></p>
+  <div class="actions">
+    <a class="btn blue" href="profile.html" data-i18n="my_profile">My cultural profile</a>
+    <a class="btn" href="submit-story.html" data-i18n="submit_cultural">Submit a cultural story</a>
+    <a class="btn ghost" href="creators.html" data-i18n="browse_creators">Browse creators</a>
+  </div>
+</div></section>
+<section class="section white"><div class="container">
+  <div class="stat-grid">
+    <div class="stat"><strong id="total">0</strong><span data-i18n="total_sub">Total submissions</span></div>
+    <div class="stat"><strong id="pending">0</strong><span data-i18n="pending_review">Pending review</span></div>
+    <div class="stat"><strong id="published">0</strong><span data-i18n="published">Published</span></div>
+    <div class="stat"><strong>✓</strong><span data-i18n="consent_req">Consent required</span></div>
+  </div>
+  <h2 id="stories" style="margin-top:36px" data-i18n="story_subs">Story submissions</h2>
+  <div style="overflow:auto"><table><thead><tr><th data-i18n="story">Story</th><th data-i18n="type">Type</th><th data-i18n="status">Status</th><th data-i18n="date">Date</th><th data-i18n="feedback">Feedback</th></tr></thead><tbody id="submission-list"></tbody></table></div>
+  <h2 id="connections" style="margin-top:36px" data-i18n="collab_received">Collaboration requests received</h2>
+  <p class="help">Accept or decline without sharing private contact details in public pages.</p>
+  <div style="overflow:auto"><table><thead><tr><th>From</th><th>Type</th><th>Message</th><th>Status</th><th>Action</th></tr></thead><tbody id="collab-inbox"></tbody></table></div>
+  <h2 style="margin-top:36px">Portfolio</h2>
+  <div style="overflow:auto"><table><thead><tr><th>Title</th><th>Type</th><th>Date</th><th></th></tr></thead><tbody id="dash-portfolio"></tbody></table></div>
+  <div id="meet-art" style="margin-top:36px"></div>
+</div></section>
+</main>
+<footer class="footer"><div class="container"><div class="footer-bottom">UmucoPulse contributor tools</div></div></footer>
+<script src="i18n.js"></script><script src="app.js"></script>
+<script>document.addEventListener("DOMContentLoaded", renderDashboard)</script>
+</body>
+</html>

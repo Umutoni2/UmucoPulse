@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Home | UmucoPulse</title>
+  <meta name="description" content="UmucoPulse is a community-centred platform for preserving and sharing Rwandan cultural heritage.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar"><div class="container"><span data-i18n="topbar_umuco">Umuco means culture.</span><span data-i18n="topbar_actions">Preserve • Share • Learn • Connect</span></div></div>
+<header><div class="container nav"><a class="brand" href="index.html"><span class="brand-mark"></span>Umuco<em>Pulse</em></a><nav class="nav-links" data-nav></nav></div></header>
+<main>
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow" data-i18n="hero_eyebrow">People · living culture · community archive</div>
+      <h1><span data-i18n="hero_title_lead">Culture lives when people</span> <span class="accent" data-i18n="hero_title_accent">share it.</span></h1>
+      <p class="lead" data-i18n="hero_sub">Discover the people, stories and practices keeping Rwandan culture alive.</p>
+      <div class="actions">
+        <a class="btn gold" href="discover.html" data-i18n="explore_culture">Explore culture</a>
+        <a class="btn" href="creators.html" data-i18n="meet_creators">Meet creators</a>
+        <a class="btn ghost" href="register.html" data-i18n="share_story">Share your story</a>
+      </div>
+    </div>
+    <aside class="hero-art">
+      <img src="assets/hero-culture.jpg" alt="A culture stays alive when people can tell it, hear it and pass it on.">
+    </aside>
+  </div>
+</section>
+<section class="section white">
+  <div class="container">
+    <div class="section-head"><div><div class="eyebrow" data-i18n="areas_eyebrow">Cultural areas</div><h2 data-i18n="areas_title">Six doors into living heritage</h2></div><p data-i18n="areas_lead">Each area is a way to preserve practice, meet practitioners and participate with consent.</p></div>
+    <div class="grid" id="home-areas"></div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="section-head"><div><div class="eyebrow" data-i18n="creators">Creators</div><h2 data-i18n="people_culture">People who carry culture</h2></div><p data-i18n="people_culture_lead">Public profiles never show email or phone numbers. Demo profiles are labelled.</p></div>
+    <div class="grid" id="featured-creators"></div>
+    <div class="actions"><a class="btn" href="creators.html" data-i18n="open_directory">Open the creators directory</a></div>
+  </div>
+</section>
+<section class="section white">
+  <div class="container" id="featured-group"></div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="section-head"><div><div class="eyebrow" data-i18n="events">Events</div><h2 data-i18n="events_title">See culture as it is practised in public.</h2></div><p data-i18n="events_lead">Performances, workshops, exhibitions and gatherings. Listings marked as prototype examples are illustrative only.</p></div>
+    <div class="grid" id="home-events"></div>
+    <div class="actions"><a class="btn" href="events.html" data-i18n="open_events">Open events</a></div>
+  </div>
+</section>
+<section class="section white">
+  <div class="container">
+    <div class="section-head"><div><div class="eyebrow" data-i18n="voices_archive">Voices Archive</div><h2 data-i18n="stories_care">Stories published with care</h2></div></div>
+    <div class="grid" id="featured-stories"></div>
+    <div class="actions"><a class="btn gold" href="voice.html" data-i18n="visit_voices">Visit the Voices Archive</a></div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="path">
+      <div class="step"><strong>1</strong><h3 data-i18n="step1_t">Create account</h3><p data-i18n="step1_p">Join as a contributor.</p></div>
+      <div class="step"><strong>2</strong><h3 data-i18n="step2_t">Build a profile</h3><p data-i18n="step2_p">Describe your practice.</p></div>
+      <div class="step"><strong>3</strong><h3 data-i18n="step3_t">Share with consent</h3><p data-i18n="step3_p">Stories wait for review.</p></div>
+      <div class="step"><strong>4</strong><h3 data-i18n="step4_t">Connect</h3><p data-i18n="step4_p">Follow and collaborate.</p></div>
+      <div class="step"><strong>5</strong><h3 data-i18n="step5_t">Attend and preserve</h3><p data-i18n="step5_p">Events can later become archive notes, with consent.</p></div>
+    </div>
+    <p class="help" data-i18n="path_line">Discover culture → Meet people & groups → See their work → Follow them → Attend events → Collaborate → Preserve the result.</p>
+  </div>
+</section>
+<section class="section dark impact-section">
+  <div class="container">
+    <h2 data-i18n="impact_so_far">Our Impact So Far</h2>
+    <div id="impact-stats"></div>
+    <p class="help" data-i18n="impact_note">These figures reflect activity currently recorded on UmucoPulse and are not national statistics.</p>
+    <div class="actions"><a class="btn ghost impact-more" href="impact.html" data-i18n="impact">Impact</a></div>
+  </div>
+</section>
+</main>
+<footer class="footer"><div class="container"><div class="footer-grid"><div><div class="brand"><span class="brand-mark"></span>Umuco<em>Pulse</em></div><p data-i18n="footer_blurb">A community-centred digital space for Rwandan cultural stories, creative voices and shared memory.</p><div class="actions"><a class="btn gold" href="register.html" data-i18n="share">Share a cultural story</a><a class="btn ghost" style="color:white;border-color:#8aa99d" href="creators.html" data-i18n="meet_creators">Meet creators</a></div></div><form id="newsletter-form"><h3 data-i18n="stay_connected">Stay connected</h3><p data-i18n="newsletter_blurb">Receive occasional updates about new stories, projects and cultural activities.</p><input id="newsletter-email" type="email" required data-i18n-placeholder="email_ph" placeholder="Email address"><div class="actions"><button class="btn gold" type="submit" data-i18n="subscribe">Subscribe</button></div><div id="newsletter-result" class="help"></div></form></div><div class="footer-bottom" data-i18n="footer_bottom">UmucoPulse · Cultural heritage through community storytelling.</div></div></footer>
+<script src="i18n.js"></script><script src="app.js"></script>
+<script>document.addEventListener("DOMContentLoaded", renderHomeExtras)</script>
+</body>
+</html>

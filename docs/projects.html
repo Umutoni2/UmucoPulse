@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Projects | UmucoPulse</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar"><div class="container"><span data-i18n="topbar_umuco">Umuco means culture.</span><span data-i18n="topbar_actions">Preserve • Share • Learn • Connect</span></div></div>
+<header><div class="container nav"><a class="brand" href="index.html"><span class="brand-mark"></span>Umuco<em>Pulse</em></a><nav class="nav-links" data-nav></nav></div></header>
+<main>
+<section class="page-head"><div class="container"><div class="eyebrow" data-i18n="projects_eyebrow">Projects</div><h1 data-i18n="projects_title">Culture becomes stronger when it is practised and shared.</h1></div></section>
+<section class="section white"><div class="container">
+  <div class="toolbar">
+    <input id="project-search" data-i18n-placeholder="search_projects" placeholder="Search projects">
+    <select id="project-filter">
+      <option value="all" data-i18n="all_categories">All categories</option>
+      <option value="education" data-i18n="education">Education</option>
+      <option value="archive" data-i18n="archive">Archive</option>
+      <option value="performance" data-i18n="performance">Performance</option>
+    </select>
+  </div>
+  <div id="projects-grid" class="grid"></div>
+</div></section>
+</main>
+<footer class="footer"><div class="container"><div class="footer-grid"><div><div class="brand"><span class="brand-mark"></span>Umuco<em>Pulse</em></div><p>A community-centred digital space for Rwandan cultural stories, creative voices and shared memory.</p></div><form id="newsletter-form"><h3>Stay connected</h3><input id="newsletter-email" type="email" required placeholder="Email address"><div class="actions"><button class="btn gold" type="submit">Subscribe</button></div><div id="newsletter-result" class="help"></div></form></div><div class="footer-bottom">UmucoPulse</div></div></footer>
+<script src="i18n.js"></script><script src="app.js"></script>
+<script>document.addEventListener("DOMContentLoaded", renderProjects)</script>
+</body>
+</html>

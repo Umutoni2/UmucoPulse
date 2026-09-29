@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>People & Groups | UmucoPulse</title>
+  <meta name="description" content="Directory of cultural practitioners on UmucoPulse.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar"><div class="container"><span data-i18n="topbar_umuco">Umuco means culture.</span><span data-i18n="topbar_actions">Preserve • Share • Learn • Connect</span></div></div>
+<header><div class="container nav"><a class="brand" href="index.html"><span class="brand-mark"></span>Umuco<em>Pulse</em></a><nav class="nav-links" data-nav></nav></div></header>
+<main>
+<section class="page-head"><div class="container"><div class="eyebrow" data-i18n="dir_eyebrow">Creator directory</div><h1 data-i18n="dir_title">Meet the people who practise culture.</h1><p class="lead" data-i18n="dir_lead">Search public profiles by name, practice or location. Email and phone numbers are never shown here. Seeded cards are labelled as demo profiles.</p></div></section>
+<section class="section white"><div class="container">
+  <div class="toolbar">
+    <input id="creator-search" data-i18n-placeholder="search_ph" placeholder="Search name, practice or location">
+    <select id="creator-kind">
+      <option value="all" data-i18n="all_kinds">All types</option>
+      <option value="individual" data-i18n="kind_individual">Individuals</option>
+      <option value="troupe" data-i18n="kind_troupe">Cultural Troupes</option>
+      <option value="community_group" data-i18n="kind_community">Community Groups</option>
+      <option value="organisation" data-i18n="kind_organisation">Organisation</option>
+    </select>
+    <select id="creator-location">
+      <option value="all" data-i18n="loc_all">All locations</option>
+      <option value="kigali" data-i18n="loc_kigali">Kigali</option>
+      <option value="huye" data-i18n="loc_huye">Huye</option>
+      <option value="musanze" data-i18n="loc_musanze">Musanze</option>
+      <option value="nyamata" data-i18n="loc_nyamata">Nyamata</option>
+      <option value="diaspora" data-i18n="loc_diaspora">Diaspora / abroad</option>
+      <option value="unlisted" data-i18n="loc_unlisted">Location not listed</option>
+    </select>
+    <select id="creator-area">
+      <option value="all" data-i18n="all_areas">All cultural areas</option>
+      <option value="oral">Oral History</option>
+      <option value="music">Music &amp; Song</option>
+      <option value="dance">Dance &amp; Movement</option>
+      <option value="poetry">Poetry &amp; Storytelling</option>
+      <option value="craft">Craft &amp; Cultural Practice</option>
+      <option value="diaspora">Diaspora Connection</option>
+    </select>
+  </div>
+  <div id="creators-grid" class="grid"></div>
+</div></section>
+</main>
+<footer class="footer"><div class="container"><div class="footer-grid"><div><div class="brand"><span class="brand-mark"></span>Umuco<em>Pulse</em></div><p>A community-centred digital space for Rwandan cultural stories, creative voices and shared memory.</p><div class="actions"><a class="btn gold" href="register.html">Share a story</a><a class="btn ghost" style="color:white;border-color:#8aa99d" href="voice.html">Explore voices</a></div></div><form id="newsletter-form"><h3>Stay connected</h3><p>Receive occasional updates.</p><input id="newsletter-email" type="email" required placeholder="Email address"><div class="actions"><button class="btn gold" type="submit">Subscribe</button></div><div id="newsletter-result" class="help"></div></form></div><div class="footer-bottom">UmucoPulse Â· Cultural heritage through community storytelling.</div></div></footer>
+<script src="i18n.js"></script><script src="app.js"></script>
+<script>document.addEventListener("DOMContentLoaded", function () { bindCreatorFilters(); renderCreators(); })</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Contact | UmucoPulse</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar"><div class="container"><span data-i18n="topbar_umuco">Umuco means culture.</span><span data-i18n="topbar_actions">Preserve • Share • Learn • Connect</span></div></div>
+<header><div class="container nav"><a class="brand" href="index.html"><span class="brand-mark"></span>Umuco<em>Pulse</em></a><nav class="nav-links" data-nav></nav></div></header>
+<main>
+<section class="page-head"><div class="container"><div class="eyebrow" data-i18n="contact_eyebrow">Contact</div><h1 data-i18n="contact_title">Have a story, idea or cultural project?</h1><p class="lead" data-i18n="contact_lead">Reach UmucoPulse or join as a contributor.</p></div></section>
+<section class="section white"><div class="container">
+  <form class="form-card" onsubmit="sendContact(event)">
+    <h2 data-i18n="send_message">Send a message</h2>
+    <label for="c-name" data-i18n="name">Name</label><input id="c-name" required>
+    <label for="c-email" data-i18n="email">Email</label><input id="c-email" type="email" required>
+    <label for="c-role" data-i18n="i_am">I am a...</label>
+    <select id="c-role">
+      <option>Cultural practitioner</option>
+      <option>Artist</option>
+      <option>Dancer</option>
+      <option>Musician</option>
+      <option>Poet</option>
+      <option>Researcher</option>
+      <option>Educator</option>
+      <option>Student</option>
+      <option>Diaspora member</option>
+      <option>Institution</option>
+      <option>Supporter</option>
+      <option>Other</option>
+    </select>
+    <label for="c-message" data-i18n="message">Message</label><textarea id="c-message" rows="6" required></textarea>
+    <div class="actions"><button class="btn clay" type="submit" data-i18n="send">Send message</button></div>
+    <div id="contact-result" class="help"></div>
+    <p class="help" data-i18n="contact_help">UmucoPulse aims to respond within two business days in a production setting.</p>
+  </form>
+</div></section>
+</main>
+<footer class="footer"><div class="container"><div class="footer-grid"><div><div class="brand"><span class="brand-mark"></span>Umuco<em>Pulse</em></div><p data-i18n="footer_blurb">A community-centred digital space for Rwandan cultural stories, creative voices and shared memory.</p></div><form id="newsletter-form"><h3 data-i18n="stay_connected">Stay connected</h3><input id="newsletter-email" type="email" required data-i18n-placeholder="email_ph" placeholder="Email address"><div class="actions"><button class="btn gold" type="submit" data-i18n="subscribe">Subscribe</button></div><div id="newsletter-result" class="help"></div></form></div><div class="footer-bottom" data-i18n="footer_bottom">UmucoPulse · Cultural heritage through community storytelling.</div></div></footer>
+<script src="i18n.js"></script><script src="app.js"></script>
+</body>
+</html>

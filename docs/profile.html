@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>My Cultural Profile | UmucoPulse</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar"><div class="container"><span data-i18n="topbar_umuco">Umuco means culture.</span><span data-i18n="topbar_actions">Preserve • Share • Learn • Connect</span></div></div>
+<header><div class="container nav"><a class="brand" href="index.html"><span class="brand-mark"></span>Umuco<em>Pulse</em></a><nav class="nav-links" data-nav></nav></div></header>
+<main>
+<section class="page-head"><div class="container"><div class="eyebrow">Contributor</div><h1>My cultural profile</h1><p class="lead">Describe your practice. Make the profile public when you are ready to appear in the Creators directory. This prototype stores text in your browser only.</p><div class="actions"><a class="btn ghost" href="dashboard.html">Back to dashboard</a></div></div></section>
+<section class="section white"><div class="container">
+  <form class="form-card wide" onsubmit="saveProfile(event)">
+    <label for="displayName">Profile / display name</label>
+    <input id="displayName" required>
+    <label for="kind">Profile type</label>
+    <select id="kind">
+      <option value="individual">Individual</option>
+      <option value="troupe">Cultural Troupe</option>
+      <option value="community_group">Community Group</option>
+      <option value="organisation">Organisation</option>
+    </select>
+    <label for="area">Primary cultural area</label>
+    <select id="area">
+      <option value="oral">Oral History</option>
+      <option value="music">Music &amp; Song</option>
+      <option value="dance">Dance &amp; Movement</option>
+      <option value="poetry">Poetry &amp; Storytelling</option>
+      <option value="craft">Craft &amp; Cultural Practice</option>
+      <option value="diaspora">Diaspora Connection</option>
+    </select>
+    <label for="role">Cultural role or practice</label>
+    <input id="role" placeholder="e.g. Dance teacher, poet, oral historian">
+    <label for="location">Location</label>
+    <input id="location" placeholder="District, country">
+    <label for="languages">Languages</label>
+    <input id="languages" placeholder="Kinyarwanda, English, Frenchâ€¦">
+    <label for="bio">Short biography</label>
+    <textarea id="bio" rows="4"></textarea>
+    <label for="background">Cultural background / context</label>
+    <textarea id="background" rows="4"></textarea>
+    <label for="skills">Skills / practices</label>
+    <textarea id="skills" rows="3"></textarea>
+    <p><strong>Available for</strong></p>
+    <div id="avail-wrap" class="check-pills"></div>
+    <div class="checkbox"><input id="isPublic" type="checkbox"><label for="isPublic" style="margin:0">Make this profile public in the Creators directory</label></div>
+    <p class="help">Avatar in this prototype is generated from your initials. Do not publish emails or phone numbers in the biography.</p>
+    <div class="actions"><button class="btn clay" type="submit">Save profile</button></div>
+    <div id="profile-result" class="help"></div>
+  </form>
+  <form class="form-card wide" onsubmit="addPortfolio(event)">
+    <h2>Add a portfolio item</h2>
+    <p class="help">Optional media is stored as a file name only. Nothing is uploaded to a server.</p>
+    <label for="p-title">Title</label>
+    <input id="p-title" required>
+    <label for="type">Type</label>
+    <select id="type"></select>
+    <label for="p-desc">Description</label>
+    <textarea id="p-desc" rows="3" required></textarea>
+    <label for="p-context">Cultural context</label>
+    <textarea id="p-context" rows="3"></textarea>
+    <label for="p-link">Optional external link</label>
+    <input id="p-link" type="url" placeholder="https://">
+    <label for="p-date">Date</label>
+    <input id="p-date" type="date">
+    <label for="p-media">Optional media (filename only)</label>
+    <input id="p-media" type="file" accept="image/*,audio/*,video/*">
+    <div class="actions"><button class="btn" type="submit">Add to portfolio</button></div>
+    <div id="port-result" class="help"></div>
+  </form>
+  <div class="container" id="portfolio-list" style="display:grid;gap:12px;max-width:980px;margin:0 auto 40px"></div>
+</div></section>
+</main>
+<footer class="footer"><div class="container"><div class="footer-bottom">UmucoPulse Â· Data in this prototype stays in localStorage on this device.</div></div></footer>
+<script src="i18n.js"></script><script src="app.js"></script>
+<script>document.addEventListener("DOMContentLoaded", renderProfileForm)</script>
+</body>
+</html>

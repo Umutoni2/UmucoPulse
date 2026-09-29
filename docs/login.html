@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Login | UmucoPulse</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar"><div class="container"><span data-i18n="topbar_umuco">Umuco means culture.</span><span data-i18n="topbar_actions">Preserve • Share • Learn • Connect</span></div></div>
+<header><div class="container nav"><a class="brand" href="index.html"><span class="brand-mark"></span>Umuco<em>Pulse</em></a><nav class="nav-links" data-nav></nav></div></header>
+<main>
+<section class="page-head"><div class="container"><div class="eyebrow" data-i18n="account">Account</div><h1 data-i18n="welcome_back">Welcome back</h1></div></section>
+<section class="section white"><div class="container">
+  <form class="form-card" onsubmit="loginUser(event)">
+    <label for="email" data-i18n="email">Email</label><input id="email" type="email" required>
+    <label for="password" data-i18n="password">Password</label><input id="password" type="password" required>
+    <div class="actions"><button class="btn" type="submit" data-i18n="login">Login</button><a class="btn ghost" href="register.html" data-i18n="create_account">Create contributor account</a></div>
+    <div class="notice"><strong>Demo administrator</strong><br>admin@umucopulse.org<br><br><strong>Demo contributor</strong><br>sylvie@umucopulse.org</div>
+    <div id="form-result" class="help"></div>
+  </form>
+</div></section>
+</main>
+<footer class="footer"><div class="container"><div class="footer-bottom" data-i18n="footer_bottom">UmucoPulse · Cultural heritage through community storytelling.</div></div></footer>
+<script src="i18n.js"></script><script src="app.js"></script>
+</body>
+</html>

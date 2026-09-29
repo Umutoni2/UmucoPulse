@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Saved | UmucoPulse</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar"><div class="container"><span data-i18n="topbar_umuco">Umuco means culture.</span><span data-i18n="topbar_actions">Preserve • Share • Learn • Connect</span></div></div>
+<header><div class="container nav"><a class="brand" href="index.html"><span class="brand-mark"></span>Umuco<em>Pulse</em></a><nav class="nav-links" data-nav></nav></div></header>
+<main>
+<section class="page-head"><div class="container"><div class="eyebrow" data-i18n="account">Account</div><h1 data-i18n="saved_items">Saved</h1>
+<nav class="section-nav"><a href="dashboard.html" data-i18n="dashboard">Dashboard</a><a href="profile.html" data-i18n="my_profile">My cultural profile</a><a href="saved.html" class="active" data-i18n="saved_items">Saved</a></nav>
+</div></section>
+<section class="section white"><div class="container"><div id="saved-grid" class="grid"></div></div></section>
+</main>
+<footer class="footer"><div class="container"><div class="footer-bottom" data-i18n="footer_bottom">UmucoPulse</div></div></footer>
+<script src="i18n.js"></script><script src="app.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const box = document.getElementById("saved-grid");
+  const favs = JSON.parse(localStorage.getItem("up2_favourites") || "[]");
+  box.innerHTML = favs.length
+    ? favs.map(function (f) { return '<article class="card"><span class="tag">' + (f.type || "item") + '</span><h3>' + (f.title || f.id) + '</h3></article>'; }).join("")
+    : '<div class="empty">Nothing saved yet.</div>';
+});
+</script>
+</body>
+</html>

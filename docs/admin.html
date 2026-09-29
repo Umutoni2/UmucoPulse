@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin | UmucoPulse</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar"><div class="container"><span data-i18n="topbar_umuco">Umuco means culture.</span><span data-i18n="topbar_actions">Preserve • Share • Learn • Connect</span></div></div>
+<header><div class="container nav"><a class="brand" href="index.html"><span class="brand-mark"></span>Umuco<em>Pulse</em></a><nav class="nav-links" data-nav></nav></div></header>
+<main>
+<section class="page-head"><div class="container"><div class="eyebrow">Control centre</div><h1>UmucoPulse Administrator</h1><p class="lead">Dashboard overview, submissions, people, content library, projects, moderation, messages and statistics. Numbers come from this browser’s prototype data.</p></div></section>
+<section class="section white"><div class="container">
+  <div class="stat-grid">
+    <div class="stat"><strong id="a-total">0</strong>Submissions</div>
+    <div class="stat"><strong id="a-pending">0</strong>Pending</div>
+    <div class="stat"><strong id="a-published">0</strong>Published stories</div>
+    <div class="stat"><strong id="a-contacts">0</strong>Messages</div>
+    <div class="stat"><strong id="a-creators">0</strong>Creator profiles</div>
+    <div class="stat"><strong id="a-areas">0</strong>Categories represented</div>
+    <div class="stat"><strong id="a-collabs">0</strong>Collaboration requests</div>
+    <div class="stat"><strong id="a-works">0</strong>Portfolio works</div>
+    <div class="stat"><strong id="a-diaspora">0</strong>Diaspora profiles</div>
+  </div>
+  <div class="tabs">
+    <button class="tab active" type="button" onclick="showAdminTab('stories',this)">Submissions</button>
+    <button class="tab" type="button" onclick="showAdminTab('creators-admin',this)">People &amp; Groups</button>
+    <button class="tab" type="button" onclick="showAdminTab('projects-admin',this)">Projects</button>
+    <button class="tab" type="button" onclick="showAdminTab('library-admin',this)">Content Library</button>
+    <button class="tab" type="button" onclick="showAdminTab('moderation-admin',this)">Moderation</button>
+    <button class="tab" type="button" onclick="showAdminTab('contacts-admin',this)">Messages</button>
+  </div>
+  <section id="stories" class="admin-panel active">
+    <div class="notice"><strong>Publication rule:</strong> consent must show as Provided. Review cultural sensitivity before Approve, then Publish.</div>
+    <div style="overflow:auto"><table><thead><tr><th>Story</th><th>Contributor</th><th>Consent</th><th>Status</th><th class="hide-mobile">Preview</th><th>Action</th></tr></thead><tbody id="admin-list"></tbody></table></div>
+  </section>
+  <section id="creators-admin" class="admin-panel">
+    <p class="help">Optionally mark a profile as curated. Demo profiles are fictional prototype content.</p>
+    <div style="overflow:auto"><table><thead><tr><th>Name</th><th>Area</th><th>Location</th><th>Visibility</th><th>Curated</th><th></th></tr></thead><tbody id="admin-creators"></tbody></table></div>
+  </section>
+  <section id="projects-admin" class="admin-panel">
+    <form class="form-card" onsubmit="addProject(event)">
+      <h3>Add project</h3>
+      <label for="p-title">Title</label><input id="p-title" required>
+      <label for="p-category">Category</label>
+      <select id="p-category"><option value="education">Education</option><option value="archive">Archive</option><option value="performance">Performance</option></select>
+      <label for="p-description">Description</label><textarea id="p-description" required></textarea>
+      <div class="actions"><button class="btn" type="submit">Add project</button></div>
+    </form>
+    <div style="overflow:auto"><table><thead><tr><th>Project</th><th>Category</th><th>Description</th><th></th></tr></thead><tbody id="admin-projects"></tbody></table></div>
+  </section>
+  <section id="library-admin" class="admin-panel">
+    <p class="help">Content Library stores documentaries, booklets, audio and other materials. Only the file name is kept.</p>
+    <form class="form-card" onsubmit="addLibraryItem(event)">
+      <h3>+ Add new content</h3>
+      <label>Title</label><input id="lib-title" required>
+      <label>Type</label><select id="lib-type"><option>Booklet</option><option>Documentary</option><option>Audio</option><option>Magazine</option><option>Other</option></select>
+      <label>Area</label><select id="lib-area"><option value="oral">Oral History</option><option value="dance">Dance &amp; Movement</option><option value="music">Music &amp; Song</option></select>
+      <label>Author</label><input id="lib-author">
+      <label>Visibility</label><select id="lib-vis"><option value="public">Public</option><option value="private">Private archive</option><option value="draft">Draft</option></select>
+      <label>File</label><input id="lib-file" type="file">
+      <label>Description</label><textarea id="lib-desc"></textarea>
+      <button class="btn" type="submit">Save</button>
+    </form>
+    <table><thead><tr><th>Title</th><th>Type</th><th>Author</th><th>Visibility</th><th>Status</th><th>File</th></tr></thead><tbody id="admin-library"></tbody></table>
+  </section>
+  <section id="moderation-admin" class="admin-panel">
+    <p class="help">Inspect first. Reports never auto-delete content.</p>
+    <table><thead><tr><th>Content</th><th>Reason</th><th>Status</th><th>Decision</th></tr></thead><tbody id="admin-reports"></tbody></table>
+  </section>
+  <section id="contacts-admin" class="admin-panel">
+    <div style="overflow:auto"><table><thead><tr><th>Name</th><th>Role</th><th>Email</th><th>Message</th><th>Date</th></tr></thead><tbody id="contact-list"></tbody></table></div>
+  </section>
+</div></section>
+</main>
+<footer class="footer"><div class="container"><div class="footer-bottom">Administrator tools Â· prototype authentication only</div></div></footer>
+<script src="i18n.js"></script><script src="app.js"></script>
+<script>document.addEventListener("DOMContentLoaded", renderAdmin)</script>
+</body>
+</html>

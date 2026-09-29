@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Register | UmucoPulse</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar"><div class="container"><span data-i18n="topbar_umuco">Umuco means culture.</span><span data-i18n="topbar_actions">Preserve • Share • Learn • Connect</span></div></div>
+<header><div class="container nav"><a class="brand" href="index.html"><span class="brand-mark"></span>Umuco<em>Pulse</em></a><nav class="nav-links" data-nav></nav></div></header>
+<main>
+<section class="page-head"><div class="container"><div class="eyebrow" data-i18n="join_eyebrow">Join the community</div><h1 data-i18n="join_title">Create a contributor account</h1><p class="lead" data-i18n="join_lead">After you register you can build a cultural profile, add portfolio notes, and submit stories with consent.</p></div></section>
+<section class="section white"><div class="container">
+  <form class="form-card" onsubmit="registerUser(event)">
+    <label for="name" data-i18n="full_name">Full name</label><input id="name" required>
+    <label for="email" data-i18n="email">Email</label><input id="email" type="email" required>
+    <label for="password" data-i18n="password">Password</label><input id="password" type="password" minlength="6" required>
+    <div class="actions"><button class="btn clay" type="submit" data-i18n="create_account">Create account</button><a class="btn ghost" href="login.html" data-i18n="already">I already have an account</a></div>
+    <div id="form-result" class="help"></div>
+  </form>
+</div></section>
+</main>
+<footer class="footer"><div class="container"><div class="footer-bottom" data-i18n="footer_bottom">UmucoPulse · Cultural heritage through community storytelling.</div></div></footer>
+<script src="i18n.js"></script><script src="app.js"></script>
+</body>
+</html>

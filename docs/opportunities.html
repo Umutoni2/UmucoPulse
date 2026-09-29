@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Opportunities | UmucoPulse</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar"><div class="container"><span data-i18n="topbar_umuco">Umuco means culture.</span><span data-i18n="topbar_actions">Preserve • Share • Learn • Connect</span></div></div>
+<header><div class="container nav"><a class="brand" href="index.html"><span class="brand-mark"></span>Umuco<em>Pulse</em></a><nav class="nav-links" data-nav></nav></div></header>
+<main>
+<section class="page-head"><div class="container"><div class="eyebrow" data-i18n="opps_eyebrow">Opportunities</div><h1 data-i18n="opps_title">Places culture can be practised and shared.</h1><p class="lead" data-i18n="opps_lead">Every listing below is a demo / prototype / illustrative example. UmucoPulse does not claim government approval, real open calls, or official institutional partners.</p></div></section>
+<section class="section white"><div class="container">
+  <p class="help" data-i18n="opp_hub_lead">Collaborations, workshops, performances, research, mentorship, open calls and school visits live here.</p>
+  <div class="grid">
+    <article class="card"><h3>Performance</h3><a class="btn small" href="creators.html" data-i18n="request_collab">Request collaboration</a></article>
+    <article class="card"><h3>Workshop</h3><a class="btn small" href="creators.html" data-i18n="request_collab">Request collaboration</a></article>
+    <article class="card"><h3>Interview</h3><a class="btn small" href="creators.html" data-i18n="request_collab">Request collaboration</a></article>
+    <article class="card"><h3>Research</h3><a class="btn small" href="creators.html" data-i18n="request_collab">Request collaboration</a></article>
+    <article class="card"><h3>School Visit</h3><a class="btn small" href="creators.html" data-i18n="request_collab">Request collaboration</a></article>
+    <article class="card"><h3>Mentorship</h3><a class="btn small" href="creators.html" data-i18n="request_collab">Request collaboration</a></article>
+    <article class="card"><h3>Event</h3><a class="btn small" href="events.html" data-i18n="open_events">Open events</a></article>
+  </div>
+  <div class="toolbar" style="margin-top:36px">
+    <select id="opp-filter" onchange="renderOpportunities()">
+      <option value="all" data-i18n="all_example_types">All example types</option>
+      <option value="school programmes">School programmes</option>
+      <option value="community projects">Community projects</option>
+      <option value="diaspora programmes">Diaspora programmes</option>
+      <option value="museum opportunities">Museum opportunities</option>
+    </select>
+  </div>
+  <div id="opp-grid" class="grid"></div>
+</div></section>
+</main>
+<footer class="footer"><div class="container"><div class="footer-grid"><div><div class="brand"><span class="brand-mark"></span>Umuco<em>Pulse</em></div><p>A community-centred digital space for Rwandan cultural stories, creative voices and shared memory.</p></div><form id="newsletter-form"><h3>Stay connected</h3><input id="newsletter-email" type="email" required placeholder="Email address"><div class="actions"><button class="btn gold" type="submit">Subscribe</button></div><div id="newsletter-result" class="help"></div></form></div><div class="footer-bottom">Illustrative listings only.</div></div></footer>
+<script src="i18n.js"></script><script src="app.js"></script>
+<script>document.addEventListener("DOMContentLoaded", renderOpportunities)</script>
+</body>
+</html>

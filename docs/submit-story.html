@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Submit Story | UmucoPulse</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="topbar"><div class="container"><span data-i18n="topbar_umuco">Umuco means culture.</span><span data-i18n="topbar_actions">Preserve • Share • Learn • Connect</span></div></div>
+<header><div class="container nav"><a class="brand" href="index.html"><span class="brand-mark"></span>Umuco<em>Pulse</em></a><nav class="nav-links" data-nav></nav></div></header>
+<main>
+<section class="page-head"><div class="container"><div class="eyebrow" data-i18n="submit_eyebrow">Share your voice</div><h1 data-i18n="submit_title">Submit a cultural story</h1><p class="lead" data-i18n="submit_lead">Your contribution stays private until consent and cultural sensitivity have been reviewed.</p></div></section>
+<section class="section white"><div class="container">
+  <form class="form-card wide" onsubmit="submitStory(event)">
+    <label for="title" data-i18n="story_title">Story title</label><input id="title" required>
+    <label for="category" data-i18n="story_cat">Story category</label>
+    <select id="category">
+      <option>Oral History</option>
+      <option>Poetry</option>
+      <option>Music</option>
+      <option>Dance</option>
+      <option>Craft</option>
+      <option>Community Story</option>
+      <option>Diaspora Story</option>
+    </select>
+    <label for="type" data-i18n="contrib_type">Contribution type</label>
+    <select id="type">
+      <option>Written Story</option>
+      <option>Audio Story</option>
+      <option>Video Story</option>
+      <option>Poetry</option>
+      <option>Dance / Performance</option>
+      <option>Music / Song</option>
+    </select>
+    <label for="story" data-i18n="story_context">Story and cultural context</label>
+    <textarea id="story" rows="9" required></textarea>
+    <label for="media" data-i18n="optional_media">Optional media</label>
+    <input id="media" type="file" accept="image/*,audio/*,video/*">
+    <p class="help" data-i18n="media_note">Prototype note: only the selected file name is stored, not the actual file.</p>
+    <div class="checkbox">
+      <input id="consent" type="checkbox">
+      <label for="consent" style="margin:0" data-i18n="consent_text">I confirm that I have permission to share this story and any attached media, and I consent to UmucoPulse reviewing it for possible publication.</label>
+    </div>
+    <div class="actions"><button class="btn clay" type="submit" data-i18n="submit_review">Submit for review</button><a class="btn ghost" href="dashboard.html" data-i18n="cancel">Cancel</a></div>
+    <div id="form-result" class="help"></div>
+  </form>
+</div></section>
+</main>
+<footer class="footer"><div class="container"><div class="footer-bottom">Consent is mandatory before publication.</div></div></footer>
+<script src="i18n.js"></script><script src="app.js"></script>
+<script>document.addEventListener("DOMContentLoaded", function () { requireAuth("contributor"); })</script>
+</body>
+</html>
