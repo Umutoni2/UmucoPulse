@@ -1,0 +1,24 @@
+{% extends "admin/base.html" %}
+{% block title %}Newsletter Subscribers{% endblock %}
+
+{% block content %}
+<div class="admin-page">
+  <h1>Newsletter Subscribers</h1>
+  {% if subscribers %}
+  <table class="admin-table">
+    <thead><tr><th>Email</th><th>Status</th><th>Subscribed</th></tr></thead>
+    <tbody>
+      {% for sub in subscribers %}
+      <tr>
+        <td>{{ sub.email }}</td>
+        <td>{% if sub.is_active %}<span class="badge badge-approved">Active</span>{% else %}<span class="badge badge-rejected">Inactive</span>{% endif %}</td>
+        <td>{{ sub.created_at.strftime('%d %b %Y') }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="empty-state">No subscribers yet.</p>
+  {% endif %}
+</div>
+{% endblock %}

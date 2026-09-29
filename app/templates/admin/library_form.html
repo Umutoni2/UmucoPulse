@@ -1,0 +1,44 @@
+{% extends "admin/base.html" %}
+{% block title %}Library item{% endblock %}
+{% block content %}
+<div class="admin-page">
+  <p><a href="{{ url_for('admin.library') }}">← Content Library</a></p>
+  <h1>{{ 'Edit content' if item else 'Add cultural content' }}</h1>
+  <form class="admin-form admin-panel" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Title</label><input name="title" required value="{{ item.title if item else '' }}">
+    <label>Content type</label>
+    <select name="content_type">{% for kind in types %}<option {% if item and item.content_type==kind %}selected{% endif %}>{{ kind }}</option>{% endfor %}</select>
+    <label>Cultural area</label>
+    <select name="area">{% for a in areas %}<option value="{{ a.id }}" {% if item and item.area==a.id %}selected{% endif %}>{{ a.name }}</option>{% endfor %}</select>
+    <label>Short description</label><textarea name="short_description" rows="2">{{ item.short_description if item else '' }}</textarea>
+    <label>Full description</label><textarea name="full_description" rows="5">{{ item.full_description if item else '' }}</textarea>
+    <label>Author / creator</label><input name="author" value="{{ item.author if item else '' }}">
+    <label>Original source</label><input name="original_source" value="{{ item.original_source if item else '' }}">
+    <label>Community / cultural group</label><input name="community" value="{{ item.community if item else '' }}">
+    <label>Publication date</label><input name="publication_date" value="{{ item.publication_date if item else '' }}">
+    <label>Location</label><input name="location" value="{{ item.location if item else '' }}">
+    <label>Language</label><input name="language" value="{{ item.language if item else '' }}">
+    <label>Cover image</label><input type="file" name="cover" accept="image/*">
+    <label>File / document</label><input type="file" name="file">
+    <p class="help">This prototype stores the file name only.</p>
+    <label>External link</label><input name="external_link" value="{{ item.external_link if item else '' }}">
+    <label>Keywords / tags</label><input name="keywords" value="{{ item.keywords if item else '' }}">
+    <label>Cultural context</label><textarea name="cultural_context" rows="3">{{ item.cultural_context if item else '' }}</textarea>
+    <label>Credits</label><input name="credits" value="{{ item.credits if item else '' }}">
+    <label>Rights / permission</label><textarea name="rights" rows="2">{{ item.rights if item else '' }}</textarea>
+    <label>Visibility</label>
+    <select name="visibility">{% for k,l in vis %}<option value="{{ k }}" {% if item and item.visibility==k %}selected{% endif %}>{{ l }}</option>{% endfor %}</select>
+    <label>Status</label>
+    <select name="status">
+      <option value="draft">Draft</option>
+      <option value="published">Published</option>
+      <option value="unpublished">Unpublished</option>
+      <option value="archived">Archived</option>
+      <option value="suspended">Suspended</option>
+    </select>
+    <label class="admin-item-meta"><input type="checkbox" name="consent" {% if item and item.consent %}checked{% endif %}> Consent confirmed</label>
+    <div class="admin-actions"><button class="btn-sm" type="submit">Save</button></div>
+  </form>
+</div>
+{% endblock %}

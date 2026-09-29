@@ -1,0 +1,114 @@
+{% extends "admin/base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="admin-page">
+  <h1>Dashboard</h1>
+  <p class="admin-subtitle">Overview of the UmucoPulse cultural community</p>
+
+  <div class="stats-grid">
+    <div class="stat-card"><span class="stat-number">{{ stats.people }}</span><span class="stat-label">People &amp; Groups</span></div>
+    <div class="stat-card"><span class="stat-number">{{ stats.works }}</span><span class="stat-label">Cultural works</span></div>
+    <div class="stat-card"><span class="stat-number">{{ stats.published }}</span><span class="stat-label">Published voices</span></div>
+    <div class="stat-card"><span class="stat-number">{{ stats.collabs }}</span><span class="stat-label">Collaboration requests</span></div>
+    <div class="stat-card"><span class="stat-number">{{ stats.reports }}</span><span class="stat-label">Reports under review</span></div>
+  </div>
+
+  <div class="dash-hero">
+    <section class="admin-panel">
+      <div class="panel-head">
+        <h2>Platform activity</h2>
+        <span class="text-muted">Last 7 days · local prototype data</span>
+      </div>
+      <div class="chart-box"><canvas id="chart-activity"></canvas></div>
+    </section>
+    <section class="admin-panel">
+      <div class="panel-head">
+        <h2>Needs attention</h2>
+      </div>
+      <ul class="attention-list">
+        <li><a href="{{ url_for('admin.stories', status='pending') }}"><strong>{{ pending }}</strong><span>Submissions waiting for review</span></a></li>
+        <li><a href="{{ url_for('admin.people') }}"><strong>{{ profiles_review }}</strong><span>Profiles under inspection</span></a></li>
+        <li><a href="{{ url_for('admin.moderation') }}"><strong>{{ reports_open }}</strong><span>Reported cultural works</span></a></li>
+        <li><a href="{{ url_for('admin.contacts', tab='unread') }}"><strong>{{ unread }}</strong><span>Unread messages</span></a></li>
+      </ul>
+    </section>
+  </div>
+
+  <div class="dash-lower">
+    <section class="admin-panel">
+      <h2>Cultural areas</h2>
+      <div class="chart-box short"><canvas id="chart-areas"></canvas></div>
+    </section>
+    <section class="admin-panel">
+      <h2>Submission status</h2>
+      <div class="chart-box short"><canvas id="chart-status"></canvas></div>
+    </section>
+  </div>
+
+  <div class="dash-bottom">
+    <section class="admin-panel">
+      <div class="panel-head">
+        <h2>Recent activity</h2>
+        <a class="panel-link" href="{{ url_for('admin.activity') }}">Full log</a>
+      </div>
+      <ul class="activity-list">
+        {% for log in logs %}
+        <li><strong>{{ log.action }}</strong> {{ log.item }} <time>{{ log.created_at.strftime('%H:%M') }} · {{ log.admin_name }}</time></li>
+        {% else %}
+        <li>No admin actions recorded yet.</li>
+        {% endfor %}
+      </ul>
+    </section>
+    <section class="admin-panel">
+      <div class="panel-head">
+        <h2>Recent moderation cases</h2>
+        <a class="panel-link" href="{{ url_for('admin.moderation') }}">Open queue</a>
+      </div>
+      <table class="admin-table">
+        <thead><tr><th>Content</th><th>Status</th><th></th></tr></thead>
+        <tbody>
+          {% for r in recent_reports %}
+          <tr>
+            <td>{{ report_label(r) }}</td>
+            <td><span class="badge badge-{{ r.status }}">{{ r.status }}</span></td>
+            <td><a class="btn-sm" href="{{ url_for('admin.report_inspect', report_id=r.id) }}">Inspect</a></td>
+          </tr>
+          {% else %}
+          <tr><td colspan="3">No reports yet.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+Chart.defaults.color = '#94A8A0';
+Chart.defaults.borderColor = '#294039';
+new Chart(document.getElementById('chart-activity'), {
+  type: 'line',
+  data: {
+    labels: {{ chart_labels|tojson }},
+    datasets: [
+      { label: 'Submissions', data: {{ stories_series|tojson }}, borderColor: '#2D80D3', backgroundColor: 'rgba(45,128,211,.12)', tension: .35, fill: true },
+      { label: 'Publications', data: {{ library_series|tojson }}, borderColor: '#0F513F', tension: .35 },
+      { label: 'Profiles', data: {{ profile_series|tojson }}, borderColor: '#F5C542', tension: .35 },
+      { label: 'Collaborations', data: {{ collab_series|tojson }}, borderColor: '#63A9ED', tension: .35 }
+    ]
+  },
+  options: { plugins: { legend: { position: 'bottom' } }, maintainAspectRatio: false, scales: { y: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: '#294039' } }, x: { grid: { color: '#294039' } } } }
+});
+new Chart(document.getElementById('chart-areas'), {
+  type: 'doughnut',
+  data: { labels: {{ area_labels|tojson }}, datasets: [{ data: {{ area_counts|tojson }}, backgroundColor: ['#2D80D3','#0F513F','#F5C542','#3BAA78','#63A9ED','#D9A91E'] }] },
+  options: { plugins: { legend: { position: 'bottom' } }, maintainAspectRatio: false }
+});
+new Chart(document.getElementById('chart-status'), {
+  type: 'bar',
+  data: { labels: ['Pending','Approved','Published','Rejected'], datasets: [{ data: {{ status_counts|tojson }}, backgroundColor: ['#F5C542','#3BAA78','#0F513F','#C6534C'] }] },
+  options: { plugins: { legend: { display: false } }, maintainAspectRatio: false, scales: { y: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: '#294039' } }, x: { grid: { display: false } } } }
+});
+</script>
+{% endblock %}

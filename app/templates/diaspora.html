@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}{{ t.diaspora_page }}{% endblock %}
+{% block content %}
+<section class="page-head"><div class="container"><div class="eyebrow">{{ t.discover }}</div><h1>{{ t.diaspora_title }}</h1><p class="lead">{{ t.diaspora_lead }}</p>
+  {% include "partials/discover_nav.html" %}
+  <div class="actions">
+    <a class="btn clay" href="{{ url_for('main.submit_story') }}">{{ t.share_story }}</a>
+    <a class="btn" href="{{ url_for('main.creators', area='diaspora') }}">{{ t.meet_creators }}</a>
+    <a class="btn ghost" href="{{ url_for('main.opportunities') }}">{{ t.support_projects }}</a>
+  </div>
+</div></section>
+<section class="section white"><div class="container">
+  <h2>{{ t.creators }}</h2>
+  <div class="grid">
+    {% for p in groups %}
+    <article class="card"><h3>{{ p.display_name }}</h3><p>{{ (p.bio or '')[:160] }}</p><a class="btn small" href="{{ url_for('main.creator', profile_id=p.id) }}">{{ t.view_profile }}</a></article>
+    {% else %}
+    <div class="empty">{{ t.no_creators }}</div>
+    {% endfor %}
+  </div>
+  <h2 style="margin-top:40px">{{ t.events }}</h2>
+  <div class="grid">
+    {% for e in events %}
+    <article class="card">{% if e.is_demo %}<span class="tag demo-tag">{{ t.illustrative_event }}</span>{% endif %}<h3>{{ e.title }}</h3><p>{{ e.description }}</p></article>
+    {% else %}
+    <div class="empty">{{ t.no_events }}</div>
+    {% endfor %}
+  </div>
+  <p class="help" style="margin-top:28px">{{ t.virtual_sessions }} — {{ t.login_to_collab }}</p>
+</div></section>
+{% endblock %}

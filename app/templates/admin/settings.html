@@ -1,0 +1,26 @@
+{% extends "admin/base.html" %}
+{% block title %}Admin settings{% endblock %}
+{% block content %}
+<div class="admin-page">
+  <h1>Admin settings</h1>
+  <p class="admin-subtitle">Homepage featured items. Stored in this database — no HTML editing required.</p>
+  <form class="admin-form admin-panel" method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Featured cultural group</label>
+    <select name="featured_group_id">
+      <option value="">Default (Intayoberana if listed)</option>
+      {% for g in groups %}
+      <option value="{{ g.id }}" {% if featured_group_id == g.id|string %}selected{% endif %}>{{ g.display_name }}</option>
+      {% endfor %}
+    </select>
+    <label>Featured cultural story</label>
+    <select name="featured_voice_id">
+      <option value="">Default first published voice</option>
+      {% for v in voices %}
+      <option value="{{ v.id }}" {% if featured_voice_id == v.id|string %}selected{% endif %}>{{ v.title }}</option>
+      {% endfor %}
+    </select>
+    <button class="btn-sm" type="submit">Save</button>
+  </form>
+</div>
+{% endblock %}

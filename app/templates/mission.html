@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Our Mission{% endblock %}
+{% block main_class %}mission-layout{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <p class="hero-badge">CulturePulse Mission</p>
+  <h1 class="hero-headline">Taking Action for Our Culture</h1>
+  <p class="hero-subtext">Taking action today so that Rwandan stories live, breathe, and guide the generations to come.</p>
+</section>
+
+<section class="mission">
+  <h2>Mission Statement</h2>
+  <blockquote class="mission-quote">"Should we wait for our culture to diminish and die or do we take action now?"</blockquote>
+  <p>As a young Rwandan living outside my country, my mission is to preserve and share the beauty of my culture wherever I go. I want to make sure that our traditions, language, and values such as <strong>unity</strong>, <strong>respect</strong>, and <strong>resilience</strong> are never forgotten.</p>
+  <figure class="image-wrapper">
+    <img src="{{ url_for('static', filename='assets/mission.svg') }}" alt="Traditional Rwandan dance troupe celebrating heritage" loading="lazy" />
+    <figcaption>Traditional Rwandan dance troupe celebrating heritage</figcaption>
+  </figure>
+  <p>At UmucoPulse, we choose action. Our mission is to document, celebrate, and continually evolve Rwandan cultural expressions — from oral traditions and poetry to dance, crafts, and contemporary storytelling.</p>
+</section>
+
+<section class="vision">
+  <h2>Our Vision</h2>
+  <figure class="image-wrapper">
+    <img src="{{ url_for('static', filename='assets/vision.svg') }}" alt="Heritage meeting innovation in modern Rwanda" loading="lazy" />
+    <figcaption>Heritage meeting innovation in modern Rwanda</figcaption>
+  </figure>
+  <p>We aim to preserve and amplify Rwandan cultural heritage through collaboration, creativity, and community engagement. Our vision is a world where Rwandan culture is globally recognized, continually reinterpreted by new generations, and sustainably supported by its communities.</p>
+</section>
+
+<section class="focus">
+  <h2>Focus Areas &amp; Progress</h2>
+  <ul>
+    <li>Launch cultural workshops in schools and youth centers</li>
+    <li>Create a digital archive of oral traditions, poetry, and family histories</li>
+    <li>Support emerging artists with micro-grants and mentorship</li>
+  </ul>
+
+  <div class="metrics-grid">
+    {% for metric in metrics %}
+    <div class="metric-card">
+      <div class="metric-header">
+        <span class="metric-label">{{ metric.label }}</span>
+        <span class="metric-value">{{ metric.value }} / {{ metric.target }}</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: {{ [(metric.value / metric.target * 100) if metric.target else 0, 100] | min }}%"></div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="featured-list">
+    <article class="featured">
+      <img src="{{ url_for('static', filename='assets/workshops.svg') }}" alt="Students participating in a cultural workshop" loading="lazy" />
+      <h4>Workshops</h4>
+      <p>Interactive learning that helps students connect identity with tradition.</p>
+    </article>
+    <article class="featured">
+      <img src="{{ url_for('static', filename='assets/archive.svg') }}" alt="Digitizing stories for a cultural archive" loading="lazy" />
+      <h4>Digital Archive</h4>
+      <p>Guided recordings and safe storage of community stories and songs.</p>
+    </article>
+    <article class="featured">
+      <img src="{{ url_for('static', filename='assets/artists.svg') }}" alt="Local artists performing on stage" loading="lazy" />
+      <h4>Artist Support</h4>
+      <p>Resources that help performers bring Rwandan culture to new audiences.</p>
+    </article>
+  </div>
+</section>
+{% endblock %}

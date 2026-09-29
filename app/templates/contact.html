@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}{{ t.contact }}{% endblock %}
+{% block content %}
+<section class="page-head">
+  <div class="container">
+    <div class="eyebrow">{{ t.contact_eyebrow }}</div>
+    <h1>{{ t.contact_title }}</h1>
+    <p class="lead">{{ t.contact_lead }}</p>
+  </div>
+</section>
+<section class="section white">
+  <div class="container">
+    <form class="form-card" method="post" novalidate>
+      <h2>{{ t.send_message }}</h2>
+      {{ form.hidden_tag() }}
+      <label>{{ t.name }}</label> {{ form.name() }}
+      {% for error in form.name.errors %}<span class="form-error">{{ error }}</span>{% endfor %}
+      <label>{{ t.email }}</label> {{ form.email() }}
+      {% for error in form.email.errors %}<span class="form-error">{{ error }}</span>{% endfor %}
+      <label>{{ t.i_am }}</label> {{ form.role() }}
+      <label>{{ t.message }}</label> {{ form.message(rows=6) }}
+      {% for error in form.message.errors %}<span class="form-error">{{ error }}</span>{% endfor %}
+      <div class="actions">
+        <button class="btn clay" type="submit">{{ t.send }}</button>
+      </div>
+      <p class="help">{{ t.contact_help }}</p>
+    </form>
+  </div>
+</section>
+{% endblock %}

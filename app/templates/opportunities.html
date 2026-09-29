@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}{{ t.opportunities }}{% endblock %}
+{% block content %}
+<section class="page-head"><div class="container">
+  <div class="eyebrow">{{ t.opps_eyebrow }}</div>
+  <h1>{{ t.opps_title }}</h1>
+  <p class="lead">{{ t.opps_lead }}</p>
+</div></section>
+<section class="section white"><div class="container">
+  <p class="help">{{ t.opp_hub_lead }}</p>
+  <div class="grid">
+    {% for ctype in collab_types %}
+    <article class="card">
+      <h3>{{ ctype }}</h3>
+      <p>{{ t.collab_help }}</p>
+      <a class="btn small" href="{{ url_for('main.creators') }}">{{ t.request_collab }}</a>
+    </article>
+    {% endfor %}
+    <article class="card">
+      <h3>{{ t.events }}</h3>
+      <p>{{ t.events_lead }}</p>
+      <a class="btn small" href="{{ url_for('main.events') }}">{{ t.open_events }}</a>
+    </article>
+  </div>
+  <h2 style="margin-top:40px">{{ t.opps_title }}</h2>
+  <form class="toolbar" method="get">
+    <select name="category" onchange="this.form.submit()">
+      <option value="all" {% if category=='all' %}selected{% endif %}>{{ t.all_example_types }}</option>
+      <option value="school programmes" {% if category=='school programmes' %}selected{% endif %}>School programmes</option>
+      <option value="community projects" {% if category=='community projects' %}selected{% endif %}>Community projects</option>
+      <option value="diaspora programmes" {% if category=='diaspora programmes' %}selected{% endif %}>Diaspora programmes</option>
+      <option value="museum opportunities" {% if category=='museum opportunities' %}selected{% endif %}>Museum opportunities</option>
+    </select>
+  </form>
+  <div class="grid">
+    {% for o in items %}
+    <article class="card">
+      <span class="tag demo-tag">{{ t.demo_listing }}</span>
+      <span class="tag">{{ o.category }}</span>
+      <h3>{{ o.title }}</h3>
+      <p class="story-meta">{{ o.location }}</p>
+      <p>{{ o.description }}</p>
+    </article>
+    {% endfor %}
+  </div>
+</div></section>
+{% endblock %}

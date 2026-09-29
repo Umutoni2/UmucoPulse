@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Content Library{% endblock %}
+{% block content %}
+<section class="page-head"><div class="container">
+  <div class="eyebrow">Cultural archive</div>
+  <h1>Cultural Content Library</h1>
+  <p class="lead">Documentaries, booklets, recordings and other materials published with consent. File names are stored in this prototype; original files stay on the device that uploaded them.</p>
+</div></section>
+<section class="section white"><div class="container">
+  <div class="grid">
+    {% for item in items %}
+    <article class="card">
+      <span class="tag lib-type"><span class="lib-dot {{ item.content_type|lower }}"></span>{{ item.content_type }}</span>
+      <h3>{{ item.title }}</h3>
+      <p class="story-meta">{{ area_name(item.area) }}{% if item.author %} · {{ item.author }}{% endif %}</p>
+      <p>{{ item.short_description }}</p>
+      {% if item.file_name %}<p class="help">File recorded: {{ item.file_name }}</p>{% endif %}
+    </article>
+    {% else %}
+    <div class="empty">No public library items yet.</div>
+    {% endfor %}
+  </div>
+</div></section>
+{% endblock %}

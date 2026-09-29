@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}{{ t.articles }}{% endblock %}
+{% block content %}
+<section class="page-head"><div class="container">
+  <div class="eyebrow">{{ t.discover }}</div>
+  <h1>{{ t.articles_title }}</h1>
+  <p class="lead">{{ t.articles_lead }}</p>
+  {% include "partials/discover_nav.html" %}
+</div></section>
+<section class="section white"><div class="container">
+  <div class="grid">
+    <article class="card">
+      <span class="tag">{{ t.article_kicker }}</span>
+      <h3>{{ t.impact_so_far }}</h3>
+      <p>{{ t.article_impact_summary }}</p>
+      <a class="btn small" href="{{ url_for('main.discover_article_impact') }}">{{ t.article_read }}</a>
+    </article>
+  </div>
+</div></section>
+{% endblock %}

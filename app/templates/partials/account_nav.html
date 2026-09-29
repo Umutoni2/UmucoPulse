@@ -1,0 +1,10 @@
+{% if current_user.is_authenticated and not current_user.is_admin %}
+<nav class="section-nav" aria-label="{{ t.account }}">
+  <a href="{{ url_for('main.dashboard') }}" {% if request.endpoint == 'main.dashboard' %}class="active"{% endif %}>{{ t.dashboard }}</a>
+  <a href="{{ url_for('main.profile') }}" {% if request.endpoint == 'main.profile' %}class="active"{% endif %}>{{ t.my_profile }}</a>
+  <a href="{{ url_for('main.profile') }}#portfolio">{{ t.my_portfolio }}</a>
+  <a href="{{ url_for('main.dashboard') }}#stories">{{ t.my_stories }}</a>
+  <a href="{{ url_for('main.dashboard') }}#connections">{{ t.connections }}</a>
+  <a href="{{ url_for('main.saved') }}" {% if request.endpoint == 'main.saved' %}class="active"{% endif %}>{{ t.saved_items }}</a>
+</nav>
+{% endif %}

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}{{ t.impact_so_far }}{% endblock %}
+{% block content %}
+<section class="page-head"><div class="container">
+  <div class="eyebrow">{{ t.discover }} · {{ t.articles }}</div>
+  <h1>{{ t.impact_so_far }}</h1>
+  <p class="lead">{{ t.article_impact_summary }}</p>
+  {% include "partials/discover_nav.html" %}
+</div></section>
+<section class="section white"><div class="container">
+  <article class="article-prose author-note">
+    <span class="tag">{{ t.article_kicker }}</span>
+    <p>{{ t.article_impact_p1 }}</p>
+    <p>{{ t.article_impact_p2 }}</p>
+    <p>{{ t.article_impact_p3 }}</p>
+    <p>{{ t.article_impact_p4 }}</p>
+  </article>
+</div></section>
+<section class="section dark impact-section">
+  <div class="container">
+    <div class="stat-grid">
+      <div class="stat"><strong>{{ impact.creators }}</strong><span>{{ t.stat_people }}</span></div>
+      <div class="stat"><strong>{{ impact.works }}</strong><span>{{ t.stat_works }}</span></div>
+      <div class="stat"><strong>{{ impact.published }}</strong><span>{{ t.stat_stories }}</span></div>
+      <div class="stat"><strong>{{ impact.areas }}</strong><span>{{ t.stat_areas }}</span></div>
+      <div class="stat"><strong>{{ impact.projects }}</strong><span>{{ t.stat_projects }}</span></div>
+      <div class="stat"><strong>{{ impact.collabs }}</strong><span>{{ t.stat_collabs }}</span></div>
+      <div class="stat"><strong>{{ impact.library }}</strong><span>{{ t.stat_library }}</span></div>
+    </div>
+    <p class="help">{{ t.impact_note }}</p>
+  </div>
+</section>
+<section class="section white"><div class="container">
+  <div class="actions">
+    <a class="btn" href="{{ url_for('main.creators') }}">{{ t.meet_creators }}</a>
+    <a class="btn ghost" href="{{ url_for('main.voice') }}">{{ t.visit_voices }}</a>
+    <a class="btn ghost" href="{{ url_for('main.discover_articles') }}">{{ t.articles }}</a>
+  </div>
+</div></section>
+{% endblock %}

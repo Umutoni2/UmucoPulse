@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% block title %}{{ t.home }}{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow">{{ t.hero_eyebrow }}</div>
+      <h1>{{ t.hero_title_lead }} <span class="accent">{{ t.hero_title_accent }}</span></h1>
+      <p class="lead">{{ t.hero_sub }}</p>
+      <div class="actions">
+        <a class="btn gold" href="{{ url_for('main.discover') }}">{{ t.explore_culture }}</a>
+        <a class="btn" href="{{ url_for('main.creators') }}">{{ t.meet_creators }}</a>
+        <a class="btn ghost" href="{{ url_for('auth.register') }}">{{ t.share_story }}</a>
+      </div>
+    </div>
+    <aside class="hero-art">
+      <img src="{{ url_for('static', filename='assets/hero-culture.jpg') }}" alt="{{ t.hero_quote }}">
+    </aside>
+  </div>
+</section>
+<section class="section white">
+  <div class="container">
+    <div class="section-head"><div><div class="eyebrow">{{ t.areas_eyebrow }}</div><h2>{{ t.areas_title }}</h2></div><p>{{ t.areas_lead }}</p></div>
+    <div class="grid">
+      {% for a in areas %}
+      <article class="card"><div class="icon">{{ a.icon }}</div><h3>{{ a.name }}</h3><p>{{ a.meaning }}</p><a href="{{ url_for('main.discover') }}#{{ a.id }}"><strong>{{ t.explore_arrow }}</strong></a></article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="section-head"><div><div class="eyebrow">{{ t.creators }}</div><h2>{{ t.people_culture }}</h2></div><p>{{ t.people_culture_lead }}</p></div>
+    <div class="grid">
+      {% for p in featured_creators %}
+      <article class="card creator-card">
+      {% if p.photo %}
+      <div class="avatar has-photo"><img src="{{ url_for('static', filename='uploads/profiles/' + p.photo) }}" alt=""></div>
+      {% else %}
+      <div class="avatar{% if p.profile_kind in ['troupe','community_group'] %} photo-ready{% endif %}">{{ p.initials() }}</div>
+      {% endif %}
+        {% if p.is_demo %}<span class="tag demo-tag">{{ t.demo_profile }}</span>{% endif %}
+        {% if p.profile_kind == 'troupe' %}<span class="tag">{{ t.kind_troupe_one }}</span>{% elif p.profile_kind == 'organisation' %}<span class="tag">{{ t.kind_organisation }}</span>{% endif %}
+        {% if p.curated %}<span class="tag curated">{{ t.reviewed }}</span>{% endif %}
+        <h3>{{ p.display_name }}</h3>
+        <p class="story-meta">{% if p.profile_kind == 'troupe' %}{{ t.kind_troupe_one }}{% elif p.profile_kind == 'organisation' %}{{ t.kind_organisation }}{% else %}{{ p.role or t.practitioner }}{% endif %} · {{ area_name(p.area) }}</p>
+        <p>{{ (p.bio or '')[:140] }}</p>
+        <a class="btn small" href="{{ url_for('main.creator', profile_id=p.id) }}">{{ t.view_profile }}</a>
+      </article>
+      {% endfor %}
+    </div>
+    <div class="actions"><a class="btn" href="{{ url_for('main.creators') }}">{{ t.open_directory }}</a></div>
+  </div>
+</section>
+{% if featured_group %}
+<section class="section white">
+  <div class="container">
+    <div class="section-head"><div><div class="eyebrow">{{ t.featured_group }}</div><h2>{{ featured_group.display_name }}</h2></div><p>{{ featured_group.bio }}</p></div>
+    <p class="story-meta">{{ t.kind_troupe_one }} · {{ area_name(featured_group.area) }}{% if featured_group.community_note %} · {{ featured_group.community_note }}{% endif %}</p>
+    <div class="actions">
+      <a class="btn blue" href="{{ url_for('main.creator', profile_id=featured_group.id) }}">{{ t.view_profile }}</a>
+      <a class="btn ghost" href="{{ url_for('main.events') }}">{{ t.open_events }}</a>
+    </div>
+  </div>
+</section>
+{% endif %}
+{% if featured_voice %}
+<section class="section">
+  <div class="container">
+    <div class="section-head"><div><div class="eyebrow">{{ t.featured_voice }}</div><h2>{{ featured_voice.title }}</h2></div></div>
+    <article class="card" style="max-width:860px">
+      <span class="tag">{{ featured_voice.category }}</span>
+      <p class="story-meta">{{ t.shared_by }} {{ featured_voice.contributor }}</p>
+      {% if featured_voice.quote %}<p><em>{{ featured_voice.quote }}</em></p>{% endif %}
+      <p>{{ (featured_voice.content or '')[:280] }}…</p>
+      <a class="btn gold" href="{{ url_for('main.voice') }}">{{ t.visit_voices }}</a>
+    </article>
+  </div>
+</section>
+{% endif %}
+{% if upcoming %}
+<section class="section white">
+  <div class="container">
+    <div class="section-head"><div><div class="eyebrow">{{ t.events }}</div><h2>{{ t.events_title }}</h2></div><p>{{ t.events_lead }}</p></div>
+    <div class="grid">
+      {% for e in upcoming %}
+      <article class="card">
+        {% if e.is_demo %}<span class="tag demo-tag">{{ t.illustrative_event }}</span>{% endif %}
+        <span class="tag">{{ e.event_type }}</span>
+        <h3>{{ e.title }}</h3>
+        <p class="story-meta">{{ e.date_label }} {% if e.location %}· {{ e.location }}{% endif %}</p>
+        <p>{{ (e.description or '')[:140] }}</p>
+      </article>
+      {% endfor %}
+    </div>
+    <div class="actions"><a class="btn" href="{{ url_for('main.events') }}">{{ t.open_events }}</a></div>
+  </div>
+</section>
+{% endif %}
+<section class="section white">
+  <div class="container">
+    <div class="section-head"><div><div class="eyebrow">{{ t.voices_archive }}</div><h2>{{ t.stories_care }}</h2></div></div>
+    <div class="grid">
+      {% for v in featured_stories %}
+      <article class="card"><span class="tag">{{ v.category }}</span><h3>{{ v.title }}</h3><p class="story-meta">{{ v.contributor }}</p><p>{{ (v.content or '')[:140] }}…</p></article>
+      {% endfor %}
+    </div>
+    <div class="actions"><a class="btn gold" href="{{ url_for('main.voice') }}">{{ t.visit_voices }}</a></div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="path">
+      <div class="step"><strong>1</strong><h3>{{ t.step1_t }}</h3><p>{{ t.step1_p }}</p></div>
+      <div class="step"><strong>2</strong><h3>{{ t.step2_t }}</h3><p>{{ t.step2_p }}</p></div>
+      <div class="step"><strong>3</strong><h3>{{ t.step3_t }}</h3><p>{{ t.step3_p }}</p></div>
+      <div class="step"><strong>4</strong><h3>{{ t.step4_t }}</h3><p>{{ t.step4_p }}</p></div>
+      <div class="step"><strong>5</strong><h3>{{ t.step5_t }}</h3><p>{{ t.step5_p }}</p></div>
+    </div>
+    <p class="help">{{ t.path_line }}</p>
+    <div class="actions">
+      <a class="btn clay" href="{{ url_for('main.events') }}">{{ t.open_events }}</a>
+      <a class="btn ghost" href="{{ url_for('main.knowledge') }}">{{ t.open_knowledge }}</a>
+    </div>
+  </div>
+</section>
+<section class="section dark impact-section">
+  <div class="container">
+    <h2>{{ t.impact_so_far }}</h2>
+    <div class="stat-grid">
+      <div class="stat"><strong>{{ impact.creators }}</strong><span>{{ t.stat_people }}</span></div>
+      <div class="stat"><strong>{{ impact.works }}</strong><span>{{ t.stat_works }}</span></div>
+      <div class="stat"><strong>{{ impact.published }}</strong><span>{{ t.stat_stories }}</span></div>
+      <div class="stat"><strong>{{ impact.areas }}</strong><span>{{ t.stat_areas }}</span></div>
+      <div class="stat"><strong>{{ impact.projects }}</strong><span>{{ t.stat_projects }}</span></div>
+      <div class="stat"><strong>{{ impact.collabs }}</strong><span>{{ t.stat_collabs }}</span></div>
+      <div class="stat"><strong>{{ impact.library }}</strong><span>{{ t.stat_library }}</span></div>
+    </div>
+    <p class="help">{{ t.impact_note }}</p>
+    <div class="actions"><a class="btn ghost impact-more" href="{{ url_for('main.impact') }}">{{ t.impact }}</a></div>
+  </div>
+</section>
+{% endblock %}

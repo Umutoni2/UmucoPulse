@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}{{ t.signup }}{% endblock %}
+{% block content %}
+<section class="page-head">
+  <div class="container">
+    <div class="eyebrow">{{ t.join_eyebrow }}</div>
+    <h1>{{ t.join_title }}</h1>
+    <p class="lead">{{ t.join_lead }}</p>
+  </div>
+</section>
+<section class="section white">
+  <div class="container">
+    <form class="form-card" method="post" novalidate>
+      {{ form.hidden_tag() }}
+      <label>{{ t.full_name }}</label> {{ form.name() }}
+      {% for error in form.name.errors %}<span class="form-error">{{ error }}</span>{% endfor %}
+      <label>{{ t.email }}</label> {{ form.email() }}
+      {% for error in form.email.errors %}<span class="form-error">{{ error }}</span>{% endfor %}
+      <label>{{ t.password }}</label> {{ form.password() }}
+      {% for error in form.password.errors %}<span class="form-error">{{ error }}</span>{% endfor %}
+      <label>{{ t.confirm_password }}</label> {{ form.confirm() }}
+      {% for error in form.confirm.errors %}<span class="form-error">{{ error }}</span>{% endfor %}
+      <div class="actions">
+        <button class="btn clay" type="submit">{{ t.create_account }}</button>
+        <a class="btn ghost" href="{{ url_for('auth.login') }}">{{ t.already }}</a>
+      </div>
+    </form>
+  </div>
+</section>
+{% endblock %}

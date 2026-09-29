@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 340" fill="none">
+  <rect width="600" height="340" fill="#1e1b4b"/>
+  <rect x="40" y="40" width="520" height="260" rx="16" fill="#312e81" opacity="0.6"/>
+  <text x="300" y="160" text-anchor="middle" fill="#22d3ee" font-size="28" font-family="Georgia,serif" font-style="italic">"I write to remember"</text>
+  <text x="300" y="310" text-anchor="middle" fill="#94a3b8" font-size="16" font-family="Segoe UI,sans-serif">Featured Poet</text>
+</svg>

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}{{ t.login }}{% endblock %}
+{% block content %}
+<section class="page-head">
+  <div class="container">
+    <div class="eyebrow">{{ t.account }}</div>
+    <h1>{{ t.welcome_back }}</h1>
+  </div>
+</section>
+<section class="section white">
+  <div class="container">
+    <form class="form-card" method="post" novalidate>
+      {{ form.hidden_tag() }}
+      <label>{{ t.email }}</label> {{ form.email() }}
+      {% for error in form.email.errors %}<span class="form-error">{{ error }}</span>{% endfor %}
+      <label>{{ t.password }}</label> {{ form.password() }}
+      {% for error in form.password.errors %}<span class="form-error">{{ error }}</span>{% endfor %}
+      <div class="actions">
+        <button class="btn" type="submit">{{ t.login }}</button>
+        <a class="btn ghost" href="{{ url_for('auth.register') }}">{{ t.create_account }}</a>
+      </div>
+      <div class="notice">
+        <strong>Demo administrator</strong><br>admin@umucopulse.org<br><br>
+        <strong>Demo contributor</strong><br>sylvie@umucopulse.org
+      </div>
+    </form>
+  </div>
+</section>
+{% endblock %}

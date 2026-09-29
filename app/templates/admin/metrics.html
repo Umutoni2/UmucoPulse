@@ -1,0 +1,27 @@
+{% extends "admin/base.html" %}
+{% block title %}Focus Metrics{% endblock %}
+
+{% block content %}
+<div class="admin-page">
+  <h1>Focus Area Progress</h1>
+  <p class="admin-subtitle">Update measurable indicators shown on the Mission page.</p>
+
+  <div class="metrics-admin-grid">
+    {% for metric in metrics %}
+    <form class="metric-form admin-panel" method="post" action="{{ url_for('admin.update_metric', metric_id=metric.id) }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+      <h3>{{ metric.label }}</h3>
+      <label>
+        Current Value
+        <input type="number" name="value" value="{{ metric.value }}" min="0" required />
+      </label>
+      <label>
+        Target
+        <input type="number" name="target" value="{{ metric.target }}" min="1" required />
+      </label>
+      <input type="submit" value="Update" />
+    </form>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

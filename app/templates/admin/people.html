@@ -1,0 +1,44 @@
+{% extends "admin/base.html" %}
+{% block title %}People & Groups{% endblock %}
+{% block content %}
+<div class="admin-page">
+  <h1>People &amp; Groups</h1>
+  <p class="admin-subtitle">Directory management. Curated Profile is not a legal verification badge.</p>
+  <div class="admin-actions"><a class="btn-sm" href="{{ url_for('admin.people_new') }}">Add person / group</a></div>
+  <div class="admin-table-wrap">
+  <table class="admin-table people-table">
+    <thead><tr><th></th><th>Name</th><th>Type</th><th>Area</th><th>Location</th><th>Works</th><th>Status</th></tr></thead>
+    <tbody>
+      {% for p in profiles %}
+      <tr>
+        <td>{% if p.photo %}<img src="{{ url_for('static', filename='uploads/profiles/' + p.photo) }}" alt="" width="36" height="36" style="border-radius:50%;object-fit:cover">{% else %}{{ p.initials() }}{% endif %}</td>
+        <td>
+          <div>{{ p.display_name }}{% if p.curated %} <span class="badge badge-active">Curated</span>{% endif %}{% if p.is_demo %} <span class="badge">demo</span>{% endif %}</div>
+          <div class="action-bar-inline">
+            <a class="btn-sm btn-clay" href="{{ url_for('main.creator', profile_id=p.id) }}">View</a>
+            <a class="btn-sm btn-clay" href="{{ url_for('admin.people_edit', profile_id=p.id) }}">Edit</a>
+            <details class="action-more">
+              <summary>More</summary>
+              <div class="action-more-panel">
+                {% if not p.curated %}<a class="btn-sm btn-gold" href="{{ url_for('admin.people_action', profile_id=p.id, action='curate') }}">Curate</a>
+                {% else %}<a class="btn-sm btn-ghost" href="{{ url_for('admin.people_action', profile_id=p.id, action='uncurate') }}">Uncurate</a>{% endif %}
+                <a class="btn-sm btn-ghost" href="{{ url_for('admin.people_action', profile_id=p.id, action='review') }}">Review</a>
+                <a class="btn-sm btn-danger" href="{{ url_for('admin.people_action', profile_id=p.id, action='suspend') }}">Suspend</a>
+                <a class="btn-sm btn-approve" href="{{ url_for('admin.people_action', profile_id=p.id, action='restore') }}">Restore</a>
+                <a class="btn-sm btn-ghost" href="{{ url_for('admin.people_action', profile_id=p.id, action='archive') }}">Archive</a>
+              </div>
+            </details>
+          </div>
+        </td>
+        <td>{{ p.profile_kind }}</td>
+        <td>{{ area_labels.get(p.area, p.area) }}</td>
+        <td>{{ p.location or '—' }}</td>
+        <td>{{ counts[p.id] }}</td>
+        <td><span class="badge badge-{{ p.moderation_status or 'active' }}">{{ p.moderation_status or 'active' }}</span></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</div>
+{% endblock %}

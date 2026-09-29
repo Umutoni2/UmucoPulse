@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{{ t.learn }}{% endblock %}
+{% block content %}
+<section class="page-head"><div class="container"><div class="eyebrow">{{ t.discover }}</div><h1>{{ t.learn_title }}</h1><p class="lead">{{ t.learn_lead }}</p>{% include "partials/discover_nav.html" %}</div></section>
+<section class="section white"><div class="container">
+  <div class="grid">
+    {% for a in areas %}
+    <article class="card"><div class="icon">{{ a.icon }}</div><h3>{{ a.name }}</h3><p>{{ a.meaning }}</p><a href="{{ url_for('main.discover') }}#{{ a.id }}">{{ t.explore_arrow }}</a></article>
+    {% endfor %}
+  </div>
+  <h2 style="margin-top:40px">{{ t.knowledge }}</h2>
+  <div class="grid">
+    {% for e in entries %}
+    <article class="card"><h3>{{ e.title }}</h3><p>{{ e.summary }}</p><a class="btn small" href="{{ url_for('main.knowledge_entry', entry_id=e.id) }}">{{ t.open_knowledge }}</a></article>
+    {% endfor %}
+  </div>
+  {% if workshops %}
+  <h2 style="margin-top:40px">{{ t.workshop_event }}</h2>
+  <div class="grid">
+    {% for e in workshops %}
+    <article class="card">{% if e.is_demo %}<span class="tag demo-tag">{{ t.illustrative_event }}</span>{% endif %}<h3>{{ e.title }}</h3><p>{{ e.description }}</p></article>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div></section>
+{% endblock %}

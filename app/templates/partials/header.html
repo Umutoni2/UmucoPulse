@@ -1,0 +1,58 @@
+<div class="topbar">
+  <div class="container">
+    <span>{{ t.topbar_umuco }}</span>
+    <span>{{ t.topbar_actions }}</span>
+  </div>
+</div>
+<header>
+  <div class="container nav">
+    <a class="brand" href="{{ url_for('main.index') }}">
+      <img class="brand-mark" src="{{ url_for('static', filename='assets/logo.svg') }}" alt="" width="32" height="32">Umuco<em>Pulse</em>
+    </a>
+    <button class="menu-toggle" type="button" aria-label="{{ t.toggle_menu }}" aria-expanded="false">☰</button>
+    <nav class="nav-links main-nav" aria-label="Main navigation">
+      <a href="{{ url_for('main.index') }}" {% if request.endpoint == 'main.index' %}class="active"{% endif %}>{{ t.home }}</a>
+      <a href="{{ url_for('main.discover') }}" {% if request.endpoint in ['main.discover', 'main.events', 'main.knowledge', 'main.knowledge_entry', 'main.learn', 'main.diaspora', 'main.discover_articles', 'main.discover_article_impact'] %}class="active"{% endif %}>{{ t.discover }}</a>
+      <a href="{{ url_for('main.creators') }}" {% if request.endpoint in ['main.creators', 'main.creator'] %}class="active"{% endif %}>{{ t.creators }}</a>
+      <a href="{{ url_for('main.voice') }}" {% if request.endpoint == 'main.voice' %}class="active"{% endif %}>{{ t.voices }}</a>
+      <a href="{{ url_for('main.opportunities') }}" {% if request.endpoint in ['main.opportunities', 'main.mentorship'] %}class="active"{% endif %}>{{ t.opportunities }}</a>
+      <a href="{{ url_for('main.about') }}" {% if request.endpoint in ['main.about', 'main.mission'] %}class="active"{% endif %}>{{ t.about }}</a>
+      <select class="lang" aria-label="{{ t.lang }}" onchange="location.href=this.value">
+        <option value="{{ url_for('main.set_language', code='en') }}" {% if current_lang == 'en' %}selected{% endif %}>EN</option>
+        <option value="{{ url_for('main.set_language', code='rw') }}" {% if current_lang == 'rw' %}selected{% endif %}>RW</option>
+        <option value="{{ url_for('main.set_language', code='fr') }}" {% if current_lang == 'fr' %}selected{% endif %}>FR</option>
+      </select>
+    </nav>
+    <div class="nav-end">
+      {% if current_user.is_authenticated %}
+        <details class="account-menu">
+          <summary class="account-chip" title="{{ current_user.name }}">
+            <span class="nav-avatar" aria-hidden="true">{{ (current_user.name or 'U')[:1]|upper }}</span>
+            <span class="sr-only">{{ current_user.name.split(' ')[0] }}</span>
+          </summary>
+          <div class="account-panel">
+            {% if current_user.is_admin %}
+              <a href="{{ url_for('admin.dashboard') }}">{{ t.dashboard }}</a>
+              <a href="{{ url_for('admin.stories') }}">{{ t.admin_submissions }}</a>
+              <a href="{{ url_for('admin.people') }}">{{ t.creators }}</a>
+              <a href="{{ url_for('admin.projects') }}">{{ t.projects }}</a>
+              <a href="{{ url_for('admin.contacts') }}">{{ t.admin_messages }}</a>
+              <a href="{{ url_for('admin.metrics') }}">{{ t.admin_stats }}</a>
+            {% else %}
+              <a href="{{ url_for('main.dashboard') }}">{{ t.dashboard }}</a>
+              <a href="{{ url_for('main.profile') }}">{{ t.my_profile }}</a>
+              <a href="{{ url_for('main.profile') }}#portfolio">{{ t.my_portfolio }}</a>
+              <a href="{{ url_for('main.dashboard') }}#stories">{{ t.my_stories }}</a>
+              <a href="{{ url_for('main.dashboard') }}#connections">{{ t.connections }}</a>
+              <a href="{{ url_for('main.saved') }}">{{ t.saved_items }}</a>
+            {% endif %}
+            <a href="{{ url_for('auth.logout') }}">{{ t.logout }}</a>
+          </div>
+        </details>
+      {% else %}
+        <a href="{{ url_for('auth.login') }}">{{ t.login }}</a>
+        <a class="btn small clay" href="{{ url_for('auth.register') }}">{{ t.join }}</a>
+      {% endif %}
+    </div>
+  </div>
+</header>

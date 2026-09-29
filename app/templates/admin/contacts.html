@@ -1,0 +1,32 @@
+{% extends "admin/base.html" %}
+{% block title %}Messages{% endblock %}
+{% block content %}
+<div class="admin-page">
+  <h1>Messages</h1>
+  <nav class="admin-tabs">
+    {% for key, label in [('all','All'),('unread','Unread'),('responded','Responded'),('archived','Archived')] %}
+    <a href="{{ url_for('admin.contacts', tab=key) }}" class="{{ 'active' if tab==key else '' }}">{{ label }}</a>
+    {% endfor %}
+  </nav>
+  <div class="admin-list">
+    {% for msg in messages %}
+    <article class="admin-item {% if not msg.is_read %}unread{% endif %}">
+      <div class="admin-item-header">
+        <h3>{{ msg.name }} <span class="text-muted">&lt;{{ msg.email }}&gt;</span></h3>
+        <span class="badge">{{ msg.role }}</span>
+      </div>
+      <p class="admin-item-meta">{{ msg.source or 'contact' }} · {{ msg.created_at.strftime('%d %B %Y at %H:%M') }} · {{ msg.inbox_status or ('read' if msg.is_read else 'unread') }}</p>
+      <p>{{ msg.message }}</p>
+      <div class="action-bar-inline">
+        {% if not msg.is_read %}<a class="btn-sm" href="{{ url_for('admin.mark_contact_read', message_id=msg.id) }}">Mark read</a>{% endif %}
+        <a class="btn-sm btn-gold" href="{{ url_for('admin.contact_action', message_id=msg.id, action='responded') }}">Responded</a>
+        <a class="btn-sm btn-ghost" href="{{ url_for('admin.contact_action', message_id=msg.id, action='archive') }}">Archive</a>
+        <a class="btn-sm btn-danger" href="{{ url_for('admin.contact_action', message_id=msg.id, action='delete') }}">Delete</a>
+      </div>
+    </article>
+    {% else %}
+    <p class="empty-state">No messages in this folder.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

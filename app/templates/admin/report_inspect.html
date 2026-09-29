@@ -1,0 +1,35 @@
+{% extends "admin/base.html" %}
+{% block title %}Inspect report{% endblock %}
+{% block content %}
+<div class="admin-page">
+  <p><a href="{{ url_for('admin.moderation') }}">← Moderation</a></p>
+  <h1>Inspect: {{ label }}</h1>
+  <p class="admin-subtitle">Reported → Under review → Suspended → Restored / Archived / Removed</p>
+  <div class="review-grid">
+    <article class="admin-panel">
+      <p><strong>Type:</strong> {{ report.item_type }} #{{ report.item_id }}</p>
+      <p><strong>Reason:</strong> {{ reasons.get(report.reason, report.reason) }}</p>
+      <p><strong>Details:</strong> {{ report.details or '—' }}</p>
+      <p><strong>Reporter:</strong> {{ report.reporter or 'Visitor' }}</p>
+      <p><strong>Status:</strong> <span class="badge badge-{{ report.status }}">{{ report.status }}</span></p>
+      <p class="notice">If this item is suspended, the public sees: “This content is temporarily unavailable while it is being reviewed.” The record stays in the database.</p>
+    </article>
+    <aside class="admin-panel">
+      <h2>Decision</h2>
+      <form method="post" action="{{ url_for('admin.report_decide', report_id=report.id) }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <label>Reason (required for remove)</label>
+        <textarea name="reason" rows="4"></textarea>
+        <div class="row-actions cols-2">
+          <button class="btn-sm btn-danger" name="decision" value="suspend" type="submit">Temporarily suspend</button>
+          <button class="btn-sm btn-approve" name="decision" value="restore" type="submit">Restore</button>
+          <button class="btn-sm btn-gold" name="decision" value="changes" type="submit">Request changes</button>
+          <button class="btn-sm btn-ghost" name="decision" value="archive" type="submit">Archive</button>
+          <button class="btn-sm btn-ghost" name="decision" value="dismiss" type="submit">Dismiss report</button>
+          <button class="btn-sm btn-danger" name="decision" value="remove" type="submit">Remove</button>
+        </div>
+      </form>
+    </aside>
+  </div>
+</div>
+{% endblock %}

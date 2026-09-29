@@ -1,0 +1,33 @@
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand"><img class="brand-mark" src="{{ url_for('static', filename='assets/logo.svg') }}" alt="" width="32" height="32">Umuco<em>Pulse</em></div>
+        <p>{{ t.footer_blurb }}</p>
+        <div class="actions">
+          <a class="btn gold" href="{{ url_for('auth.register') }}">{{ t.share }}</a>
+          <a class="btn ghost" style="color:white;border-color:#8aa99d" href="{{ url_for('main.creators') }}">{{ t.meet_creators }}</a>
+        </div>
+        <p class="help" style="margin-top:16px">
+          <a href="{{ url_for('main.discover') }}">{{ t.discover }}</a> ·
+          <a href="{{ url_for('main.creators') }}">{{ t.creators }}</a> ·
+          <a href="{{ url_for('main.voice') }}">{{ t.voices }}</a> ·
+          <a href="{{ url_for('main.opportunities') }}">{{ t.opportunities }}</a> ·
+          <a href="{{ url_for('main.library') }}">Library</a> ·
+          <a href="{{ url_for('main.about') }}">{{ t.about }}</a> ·
+          <a href="{{ url_for('main.contact') }}">{{ t.contact }}</a>
+        </p>
+      </div>
+      <form action="{{ url_for('main.newsletter') }}" method="post">
+        {{ newsletter_form.hidden_tag() }}
+        <h3>{{ t.stay_connected }}</h3>
+        <p>{{ t.newsletter_blurb }}</p>
+        {{ newsletter_form.email(placeholder=t.email_ph) }}
+        <div class="actions">
+          <button class="btn gold" type="submit">{{ t.subscribe }}</button>
+        </div>
+      </form>
+    </div>
+    <div class="footer-bottom">{{ t.footer_bottom }}</div>
+  </div>
+</footer>

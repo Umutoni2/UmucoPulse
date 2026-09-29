@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Admin{% endblock %} | UmucoPulse</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}" />
+</head>
+<body class="admin-body">
+  {% if current_user.is_authenticated and current_user.is_admin %}
+  <button class="admin-toggle" type="button" id="admin-toggle">Menu</button>
+  <div class="admin-shell">
+  <aside class="admin-sidebar" id="admin-sidebar">
+    <div class="admin-brand">
+      <img class="brand-mark" src="{{ url_for('static', filename='assets/logo.svg') }}" alt="" width="32" height="32">
+      <div>
+        <strong>UmucoPulse</strong>
+        <small>Cultural control centre</small>
+      </div>
+    </div>
+    <nav>
+      <a href="{{ url_for('admin.dashboard') }}" {% if request.endpoint == 'admin.dashboard' %}class="active"{% endif %}><span>⌂</span> Dashboard</a>
+      <a href="{{ url_for('admin.stories') }}" {% if request.endpoint in ['admin.stories', 'admin.story_review'] %}class="active"{% endif %}><span>▤</span> Submissions</a>
+      <a href="{{ url_for('admin.people') }}" {% if request.endpoint in ['admin.people', 'admin.people_new', 'admin.people_edit'] %}class="active"{% endif %}><span>◎</span> People &amp; Groups</a>
+      <a href="{{ url_for('admin.library') }}" {% if request.endpoint in ['admin.library', 'admin.library_new', 'admin.library_edit'] %}class="active"{% endif %}><span>▣</span> Content Library</a>
+      <a href="{{ url_for('admin.projects') }}" {% if request.endpoint in ['admin.projects', 'admin.project_edit'] %}class="active"{% endif %}><span>✦</span> Projects</a>
+      <a href="{{ url_for('admin.moderation') }}" {% if request.endpoint in ['admin.moderation', 'admin.report_inspect'] %}class="active"{% endif %}><span>⚑</span> Moderation</a>
+      <a href="{{ url_for('admin.contacts') }}" {% if request.endpoint == 'admin.contacts' %}class="active"{% endif %}><span>✉</span> Messages</a>
+      <a href="{{ url_for('admin.statistics') }}" {% if request.endpoint == 'admin.statistics' %}class="active"{% endif %}><span>▦</span> Statistics</a>
+    </nav>
+    <div class="nav-foot">
+      <a href="{{ url_for('main.index') }}">View website</a>
+      <a href="{{ url_for('admin.settings') }}" {% if request.endpoint == 'admin.settings' %}class="active"{% endif %}>Settings</a>
+      <a href="{{ url_for('auth.logout') }}">Logout</a>
+    </div>
+  </aside>
+  <div class="admin-main">
+    <header class="admin-topbar">
+      <form class="admin-search" action="{{ url_for('admin.search') }}" method="get">
+        <input type="search" name="q" value="{{ request.args.get('q', '') }}" placeholder="Search people, stories, library…" />
+      </form>
+      <div class="admin-topbar-right">
+        <a class="top-chip{% if pending_reviews %} has-pending{% endif %}" href="{{ url_for('admin.stories', status='pending') }}">{{ pending_reviews }} pending reviews</a>
+        <a class="top-bell" href="{{ url_for('admin.moderation') }}" title="Moderation">
+          🔔
+          {% if nav_alerts %}<i>{{ nav_alerts }}</i>{% endif %}
+        </a>
+        <div class="top-profile">
+          <span class="top-avatar">{{ current_user.name[:1] }}</span>
+          <div>
+            <strong>{{ current_user.name.split(' ')[0] }}</strong>
+            <small>Administrator</small>
+          </div>
+        </div>
+      </div>
+    </header>
+    {% include 'partials/flash.html' %}
+    {% block content %}{% endblock %}
+  </div>
+  </div>
+  <script>
+    document.getElementById('admin-toggle')?.addEventListener('click', function () {
+      document.getElementById('admin-sidebar').classList.toggle('open');
+    });
+  </script>
+  {% block scripts %}{% endblock %}
+  {% else %}
+  <div class="admin-main admin-main-guest">
+    {% include 'partials/flash.html' %}
+    {% block guest %}{% endblock %}
+  </div>
+  {% endif %}
+</body>
+</html>

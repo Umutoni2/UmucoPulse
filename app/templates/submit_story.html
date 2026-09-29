@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}{{ t.submit_title }}{% endblock %}
+{% block content %}
+<section class="page-head">
+  <div class="container">
+    <div class="eyebrow">{{ t.submit_eyebrow }}</div>
+    <h1>{{ t.submit_title }}</h1>
+    <p class="lead">{{ t.submit_lead }}</p>
+  </div>
+</section>
+<section class="section white">
+  <div class="container">
+    <form class="form-card wide" method="post" novalidate>
+      {{ form.hidden_tag() }}
+      <p class="help">{{ t.full_name }}: <strong>{{ current_user.name }}</strong></p>
+      <label>{{ t.story_title }}</label> {{ form.title() }}
+      {% for error in form.title.errors %}<span class="form-error">{{ error }}</span>{% endfor %}
+      <label>{{ t.story_cat }}</label> {{ form.category() }}
+      <label>{{ t.contrib_type }}</label> {{ form.story_type() }}
+      <label>{{ t.story_context }}</label>
+      {{ form.content(rows=9) }}
+      {% for error in form.content.errors %}<span class="form-error">{{ error }}</span>{% endfor %}
+      <label>{{ t.consent_level }}</label> {{ form.consent_level() }}
+      <label>{{ t.credit }}</label> {{ form.credit_role() }}
+      <label>{{ t.credit_name }}</label> {{ form.credit_name() }}
+      <div class="checkbox">
+        {{ form.consent() }}
+        <label for="consent">{{ t.consent_text }}</label>
+      </div>
+      {% for error in form.consent.errors %}<span class="form-error">{{ error }}</span>{% endfor %}
+      <p class="help">{{ t.media_note }}</p>
+      <div class="actions">
+        <button class="btn clay" type="submit">{{ t.submit_review }}</button>
+        <a class="btn ghost" href="{{ url_for('main.dashboard') }}">{{ t.cancel }}</a>
+      </div>
+    </form>
+  </div>
+</section>
+{% endblock %}

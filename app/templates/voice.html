@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}{{ t.voices }}{% endblock %}
+
+{% block content %}
+<section class="page-head">
+  <div class="container">
+    <div class="eyebrow">{{ t.voices_archive }}</div>
+    <h1>{{ t.voices_title }}</h1>
+    <p class="lead">{{ t.voices_lead }}</p>
+    <nav class="section-nav" aria-label="{{ t.voices }}">
+      <a href="{{ url_for('main.voice') }}" {% if not cat or cat=='all' %}class="active"{% endif %}>{{ t.all_areas }}</a>
+      {% for cid, cname in voice_cats %}
+      <a href="{{ url_for('main.voice', cat=cid) }}" {% if cat==cid %}class="active"{% endif %}>{{ cname }}</a>
+      {% endfor %}
+      {% if current_user.is_authenticated %}
+      <a href="{{ url_for('main.saved') }}">{{ t.saved_items }}</a>
+      {% endif %}
+    </nav>
+    <div class="actions">
+      <a class="btn clay" href="{{ url_for('main.submit_story') }}">{{ t.submit_story }}</a>
+    </div>
+  </div>
+</section>
+<section class="section white">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">{{ t.published_voices }}</div>
+        <h2>{{ t.community_archive }}</h2>
+      </div>
+      <p>{{ t.voices_more }}</p>
+    </div>
+    <div class="grid">
+      {% for voice in featured_voices %}
+      <article class="card story-card">
+        <div><span class="tag">{{ voice.category }}</span></div>
+        <h3>{{ voice.title }}</h3>
+        <div class="story-meta">{{ t.shared_by }} {{ voice.contributor }}</div>
+        {% if voice.quote %}<p><em>{{ voice.quote }}</em></p>{% endif %}
+        <p class="story-text">{{ voice.content }}</p>
+      </article>
+      {% endfor %}
+      {% for voice in community_voices %}
+      <article class="card story-card">
+        <div><span class="tag">{{ voice.category }}</span></div>
+        <h3>{{ voice.title }}</h3>
+        <div class="story-meta">{{ t.shared_by }} {{ voice.contributor }}</div>
+        <p class="story-text">{{ voice.content }}</p>
+      </article>
+      {% endfor %}
+    </div>
+    {% if not featured_voices and not community_voices %}
+    <div class="empty">{{ t.no_stories }}</div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}{{ t.events }}{% endblock %}
+{% block content %}
+<section class="page-head"><div class="container"><div class="eyebrow">{{ t.discover }}</div><h1>{{ t.events_title }}</h1><p class="lead">{{ t.events_lead }}</p>{% include "partials/discover_nav.html" %}</div></section>
+<section class="section white"><div class="container">
+  <form class="toolbar" method="get">
+    <select name="type" onchange="this.form.submit()">
+      <option value="all" {% if event_type=='all' %}selected{% endif %}>{{ t.all_event_types }}</option>
+      {% for value, label in event_types %}
+      <option value="{{ value }}" {% if event_type==value %}selected{% endif %}>{{ label }}</option>
+      {% endfor %}
+    </select>
+    <select name="location" onchange="this.form.submit()">
+      <option value="all" {% if location=='all' %}selected{% endif %}>{{ t.loc_all }}</option>
+      <option value="kigali" {% if location=='kigali' %}selected{% endif %}>{{ t.loc_kigali }}</option>
+      <option value="huye" {% if location=='huye' %}selected{% endif %}>{{ t.loc_huye }}</option>
+      <option value="musanze" {% if location=='musanze' %}selected{% endif %}>{{ t.loc_musanze }}</option>
+      <option value="diaspora" {% if location=='diaspora' %}selected{% endif %}>{{ t.loc_diaspora }}</option>
+    </select>
+  </form>
+  <div class="grid">
+    {% for e in items %}
+    <article class="card">
+      {% if e.is_demo %}<span class="tag demo-tag">{{ t.illustrative_event }}</span>{% endif %}
+      <span class="tag">{{ e.event_type }}</span>
+      <h3>{{ e.title }}</h3>
+      <p class="story-meta">{{ e.date_label }} {% if e.location %}· {{ e.location }}{% endif %}</p>
+      {% if e.profile_id and hosts.get(e.profile_id) %}
+      <p class="story-meta">{{ t.hosted_by }} <a href="{{ url_for('main.creator', profile_id=e.profile_id) }}">{{ hosts[e.profile_id].display_name }}</a></p>
+      {% endif %}
+      <p>{{ e.description }}</p>
+      <div class="actions">
+        {% if e.profile_id %}<a class="btn small" href="{{ url_for('main.creator', profile_id=e.profile_id) }}">{{ t.view_profile }}</a>{% endif %}
+        {% if current_user.is_authenticated %}
+        <form method="post" action="{{ url_for('main.toggle_save', item_type='event', item_id=e.id) }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button class="btn ghost small" type="submit">{{ t.save }}</button>
+        </form>
+        {% endif %}
+      </div>
+    </article>
+    {% else %}
+    <div class="empty">{{ t.no_events }}</div>
+    {% endfor %}
+  </div>
+</div></section>
+{% endblock %}

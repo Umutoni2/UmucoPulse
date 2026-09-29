@@ -1,0 +1,12 @@
+{% extends "admin/base.html" %}
+{% block title %}Login{% endblock %}
+{% block guest %}
+<div class="admin-login">
+  <div class="login-card">
+    <h1>Admin Login</h1>
+    <p>UmucoPulse administration panel</p>
+    <p>Use the public login page for this prototype.</p>
+    <a class="btn-sm" href="{{ url_for('auth.login') }}">Go to login</a>
+  </div>
+</div>
+{% endblock %}

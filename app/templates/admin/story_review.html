@@ -1,0 +1,44 @@
+{% extends "admin/base.html" %}
+{% block title %}Review submission{% endblock %}
+{% block content %}
+<div class="admin-page">
+  <p><a href="{{ url_for('admin.stories') }}">← Submissions</a></p>
+  <h1>{{ submission.title }}</h1>
+  <div class="review-grid">
+    <article class="admin-panel">
+      <p class="admin-item-meta">{{ submission.name }} · {{ submission.email }} · {{ submission.created_at.strftime('%d %b %Y %H:%M') }}</p>
+      <p><strong>Category:</strong> {{ submission.category }} · <strong>Type:</strong> {{ submission.story_type }}</p>
+      <p><strong>Consent:</strong> {{ 'Confirmed' if submission.consent else 'Not confirmed' }} · {{ submission.consent_level }}</p>
+      <p><strong>Credit:</strong> {{ submission.credit_role }} {{ submission.credit_name }}</p>
+      <div class="notice">{{ submission.content }}</div>
+      {% if submission.admin_notes %}<p><strong>Notes:</strong> {{ submission.admin_notes }}</p>{% endif %}
+    </article>
+    <aside class="admin-panel">
+      <h2>Actions</h2>
+      {% if not submission.consent %}<p class="notice">Publication is blocked until consent is confirmed.</p>{% endif %}
+      {% if submission.status == 'pending' or submission.status == 'approved' %}
+      <div class="row-actions cols-2">
+      {% if submission.status == 'pending' %}
+      <a class="btn-sm btn-approve" href="{{ url_for('admin.approve_story', story_id=submission.id) }}">Approve</a>
+      {% endif %}
+      {% if submission.status == 'approved' %}
+      <a class="btn-sm btn-approve" href="{{ url_for('admin.publish_story', story_id=submission.id) }}">Publish</a>
+      {% endif %}
+      </div>
+      {% endif %}
+      <form method="post" action="{{ url_for('admin.request_changes', story_id=submission.id) }}" style="margin-top:16px">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <label>Request changes (reason required)</label>
+        <textarea name="reason" rows="3" required></textarea>
+        <button class="btn-sm btn-gold" type="submit">Request changes</button>
+      </form>
+      <form method="post" action="{{ url_for('admin.reject_story', story_id=submission.id) }}" style="margin-top:16px">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <label>Reject (reason required)</label>
+        <textarea name="reason" rows="3" required></textarea>
+        <button class="btn-sm btn-reject" type="submit">Reject</button>
+      </form>
+    </aside>
+  </div>
+</div>
+{% endblock %}

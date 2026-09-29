@@ -1,0 +1,24 @@
+{% if similar %}
+<section class="meet-art" style="margin-top:36px">
+  <h2>{{ t.meet_same_art }}</h2>
+  <p class="help">{{ t.meet_same_art_lead }}</p>
+  <div class="grid">
+    {% for item in similar %}
+    <article class="card rec-card">
+      <p class="tag">{{ area_name(item.profile.area) }}</p>
+      <h3>{{ item.profile.display_name }}</h3>
+      <p class="story-meta">{{ item.kind_label }}{% if item.profile.location %} · {{ item.profile.location }}{% endif %}</p>
+      <p class="help">{{ item.reason }}</p>
+      <div class="actions">
+        <a class="btn small blue" href="{{ url_for('main.creator', profile_id=item.profile.id) }}">{{ t.view_profile }}</a>
+        {% if current_user.is_authenticated %}
+        <a class="btn small" href="{{ url_for('main.creator', profile_id=item.profile.id) }}#collab">{{ t.connect_cta }}</a>
+        {% else %}
+        <a class="btn small" href="{{ url_for('auth.login') }}">{{ t.connect_cta }}</a>
+        {% endif %}
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}

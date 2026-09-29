@@ -1,0 +1,40 @@
+{% extends "admin/base.html" %}
+{% block title %}Moderation{% endblock %}
+{% block content %}
+<div class="admin-page">
+  <h1>Moderation</h1>
+  <p class="admin-subtitle">A report is a request to inspect. Nothing is deleted automatically.</p>
+  <div class="pipeline">
+    <span>Reported <em>{{ counts.reported }}</em></span>
+    <span>Under review <em>{{ counts.review }}</em></span>
+    <span>Suspended <em>{{ counts.suspended }}</em></span>
+    <span>Resolved / archived <em>{{ counts.resolved }}</em></span>
+  </div>
+  <nav class="admin-tabs">
+    <a href="{{ url_for('admin.moderation', tab='all') }}" class="{{ 'active' if tab=='all' else '' }}">All</a>
+    <a href="{{ url_for('admin.moderation', tab='reported') }}" class="{{ 'active' if tab=='reported' else '' }}">Reported</a>
+    <a href="{{ url_for('admin.moderation', tab='review') }}" class="{{ 'active' if tab=='review' else '' }}">Under review</a>
+    <a href="{{ url_for('admin.moderation', tab='resolved') }}" class="{{ 'active' if tab=='resolved' else '' }}">Resolved</a>
+  </nav>
+  <div class="admin-table-wrap">
+  <table class="admin-table">
+    <thead><tr><th>Content</th><th>Type</th><th>Reason</th><th>Reporter</th><th>Date</th><th>Status</th><th></th></tr></thead>
+    <tbody>
+      {% for r in reports %}
+      <tr>
+        <td>{{ report_label(r) }}</td>
+        <td>{{ r.item_type }}</td>
+        <td>{{ reasons.get(r.reason, r.reason) }}</td>
+        <td>{{ r.reporter or 'Visitor' }}</td>
+        <td>{{ r.created_at.strftime('%d %b %Y') }}</td>
+        <td><span class="badge badge-{{ r.status }}">{{ r.status }}</span></td>
+        <td><a class="btn-sm" href="{{ url_for('admin.report_inspect', report_id=r.id) }}">Inspect</a></td>
+      </tr>
+      {% else %}
+      <tr><td colspan="7">No reports in this view.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</div>
+{% endblock %}

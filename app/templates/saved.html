@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}{{ t.saved_items }}{% endblock %}
+{% block content %}
+<section class="page-head"><div class="container">
+  <div class="eyebrow">{{ t.account }}</div>
+  <h1>{{ t.saved_items }}</h1>
+  {% include "partials/account_nav.html" %}
+</div></section>
+<section class="section white"><div class="container">
+  <div class="grid">
+    {% for row in items %}
+    <article class="card">
+      <span class="tag">{{ row.kind }}</span>
+      <h3>{{ row.title }}</h3>
+      {% if row.url %}<a class="btn small" href="{{ row.url }}">{{ t.explore_arrow }}</a>{% endif %}
+    </article>
+    {% else %}
+    <div class="empty">{{ t.no_saved }}</div>
+    {% endfor %}
+  </div>
+</div></section>
+{% endblock %}

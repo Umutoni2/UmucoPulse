@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% block title %}{{ profile.display_name }}{% endblock %}
+{% block content %}
+<section class="section white"><div class="container">
+  <div class="profile-hero">
+    {% if profile.photo %}
+    <div class="avatar large has-photo"><img src="{{ url_for('static', filename='uploads/profiles/' + profile.photo) }}" alt=""></div>
+    {% else %}
+    <div class="avatar large{% if profile.profile_kind in ['troupe','community_group'] %} photo-ready{% endif %}">{{ profile.initials() }}</div>
+    {% endif %}
+    <div>
+      {% if profile.is_demo %}<span class="tag demo-tag">{{ t.demo_profile }}</span>{% endif %}
+      {% if not profile.is_demo and profile.profile_kind == 'troupe' %}<span class="tag">{{ t.listed_org }}</span>{% endif %}
+      {% if profile.profile_kind == 'troupe' %}<span class="tag">{{ t.kind_troupe_one }}</span>{% elif profile.profile_kind == 'community_group' %}<span class="tag">{{ t.kind_community }}</span>{% elif profile.profile_kind == 'organisation' %}<span class="tag">{{ t.kind_organisation }}</span>{% endif %}
+      {% if profile.curated %}<span class="tag curated">{{ t.reviewed }}</span>{% endif %}
+      <h1>{{ profile.display_name }}</h1>
+      <p class="lead">{% if profile.profile_kind == 'troupe' %}{{ t.kind_troupe_one }}{% elif profile.profile_kind == 'organisation' %}{{ t.kind_organisation }}{% else %}{{ profile.role or t.practitioner }}{% endif %} · {{ area_name(profile.area) }}</p>
+      {% if profile.location %}<p class="story-meta">{{ profile.location }}</p>{% endif %}
+      <p class="story-meta">{{ followers }} {{ t.followers }} · {{ works|length }} {{ t.works }}</p>
+      <div class="actions">
+        {% if current_user.is_authenticated %}
+        <form method="post" action="{{ url_for('main.toggle_save', item_type='profile', item_id=profile.id) }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button class="btn ghost" type="submit">{% if saved %}{{ t.saved }}{% else %}{{ t.save }}{% endif %}</button>
+        </form>
+        {% endif %}
+        {% if current_user.is_authenticated and not mine %}
+        <form method="post" action="{{ url_for('main.follow_creator', profile_id=profile.id) }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button class="btn ghost" type="submit">{% if following %}{{ t.following }}{% else %}{{ t.follow }}{% endif %}</button>
+        </form>
+        <a class="btn clay" href="#collab">{{ t.request_collab }}</a>
+        {% elif not current_user.is_authenticated %}
+        <a class="btn ghost" href="{{ url_for('auth.login') }}">{{ t.login_to_follow }}</a>
+        <a class="btn clay" href="{{ url_for('auth.login') }}">{{ t.request_collab }}</a>
+        {% endif %}
+        {% if profile.website %}
+        <a class="btn ghost" href="{{ profile.website }}" rel="noopener noreferrer" target="_blank">{{ t.visit_website }}</a>
+        {% endif %}
+        <a class="btn ghost" href="{{ url_for('main.creators') }}">{{ t.all_creators }}</a>
+      </div>
+    </div>
+  </div>
+  <div class="grid two" style="margin-top:28px">
+    <article class="card">
+      <h3>{{ t.biography }}</h3><p>{{ profile.bio or t.no_bio }}</p>
+      {% if profile.background %}<h3>{{ t.cultural_context }}</h3><p>{{ profile.background }}</p>{% endif %}
+      {% if profile.community_note %}
+      <h3>{{ t.community }}</h3>
+      <p>{{ profile.community_note }}</p>
+      {% endif %}
+    </article>
+    <article class="card">
+      {% if profile.languages %}<h3>{{ t.languages }}</h3><p>{{ profile.languages }}</p>{% endif %}
+      {% if profile.practices_list() %}
+      <h3>{{ t.practices }}</h3>
+      <p>{% for x in profile.practices_list() %}<span class="tag">{{ x }}</span> {% endfor %}</p>
+      {% endif %}
+      {% if profile.available_list() %}
+      <h3>{{ t.available_for }}</h3>
+      <p>{% for x in profile.available_list() %}<span class="tag">{{ x }}</span> {% endfor %}</p>
+      {% endif %}
+      <p class="help">{{ t.private_contact }}</p>
+    </article>
+  </div>
+  <h2 style="margin-top:36px">{{ t.portfolio }}</h2>
+  <div class="grid">
+    {% for w in works %}
+    <article class="card"><span class="tag">{{ w.item_type }}</span><h3>{{ w.title }}</h3>
+      {% if w.description %}<p>{{ w.description }}</p>{% endif %}
+      {% if w.context %}<p class="story-meta">{{ w.context }}</p>{% endif %}
+      {% if w.date_label or w.media_name %}<p class="story-meta">{{ w.date_label }} {% if w.media_name %}· {{ t.media_filename }}: {{ w.media_name }}{% endif %}</p>{% endif %}
+      {% if w.link %}<p><a href="{{ w.link }}" rel="noopener noreferrer">{{ t.external_link }}</a></p>{% endif %}
+    </article>
+    {% else %}
+    <div class="empty">{{ t.no_portfolio }}</div>
+    {% endfor %}
+  </div>
+  {% if host_events %}
+  <h2 style="margin-top:36px">{{ t.events }}</h2>
+  <div class="grid">
+    {% for e in host_events %}
+    <article class="card">
+      {% if e.is_demo %}<span class="tag demo-tag">{{ t.illustrative_event }}</span>{% endif %}
+      <span class="tag">{{ e.event_type }}</span>
+      <h3>{{ e.title }}</h3>
+      <p class="story-meta">{{ e.date_label }} {% if e.location %}· {{ e.location }}{% endif %}</p>
+      <p>{{ e.description }}</p>
+    </article>
+    {% endfor %}
+  </div>
+  {% endif %}
+  <form class="form-card" method="post" action="{{ url_for('main.report_content', item_type='profile', item_id=profile.id) }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <h3>{{ t.report }}</h3>
+    <p class="help">{{ t.report_help }}</p>
+    <label>{{ t.report_reason }}</label>
+    <select name="reason">
+      {% for value, label in report_reasons %}
+      <option value="{{ value }}">{{ label }}</option>
+      {% endfor %}
+    </select>
+    <label>{{ t.message }}</label>
+    <textarea name="details" rows="3"></textarea>
+    <div class="actions"><button class="btn ghost" type="submit">{{ t.report }}</button></div>
+  </form>
+  {% if current_user.is_authenticated and not mine %}
+  <form id="collab" class="form-card" method="post" action="{{ url_for('main.collaborate', profile_id=profile.id) }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <h3>{{ t.request_collab }}</h3>
+    <p class="help">{{ t.collab_help }}</p>
+    <label>{{ t.collab_type }}</label>
+    <select name="request_type">{% for ctype in collab_types %}<option>{{ ctype }}</option>{% endfor %}</select>
+    <label>{{ t.short_message }}</label>
+    <textarea name="message" rows="5" required></textarea>
+    <div class="actions"><button class="btn clay" type="submit">{{ t.send_request }}</button></div>
+  </form>
+  {% elif not current_user.is_authenticated %}
+  <p id="collab" class="help">{{ t.login_to_collab }}</p>
+  {% endif %}
+  {% include "partials/meet_same_art.html" %}
+</div></section>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "admin/base.html" %}
+{% block title %}Search{% endblock %}
+{% block content %}
+<div class="admin-page">
+  <h1>Search</h1>
+  <p class="admin-subtitle">{% if q %}Results for “{{ q }}”{% else %}Use the top bar to search people, stories and library items.{% endif %}</p>
+  {% if q %}
+  <section class="admin-panel" style="margin-bottom:16px">
+    <h2>People &amp; Groups</h2>
+    {% for p in people %}<p><a href="{{ url_for('admin.people_edit', profile_id=p.id) }}">{{ p.display_name }}</a></p>
+    {% else %}<p class="empty-state">No people matched.</p>{% endfor %}
+  </section>
+  <section class="admin-panel" style="margin-bottom:16px">
+    <h2>Submissions</h2>
+    {% for s in stories %}<p><a href="{{ url_for('admin.story_review', story_id=s.id) }}">{{ s.title }}</a></p>
+    {% else %}<p class="empty-state">No submissions matched.</p>{% endfor %}
+  </section>
+  <section class="admin-panel">
+    <h2>Library</h2>
+    {% for item in items %}<p><a href="{{ url_for('admin.library_edit', item_id=item.id) }}">{{ item.title }}</a></p>
+    {% else %}<p class="empty-state">No library items matched.</p>{% endfor %}
+  </section>
+  {% endif %}
+</div>
+{% endblock %}

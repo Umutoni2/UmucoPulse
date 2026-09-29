@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}{{ t.about }}{% endblock %}
+{% block content %}
+<section class="page-head"><div class="container"><div class="eyebrow">{{ t.about_eyebrow }}</div><h1>{{ t.about_title }}</h1></div></section>
+<section class="section white"><div class="container about-note">
+  <div>
+    <h2>{{ t.what_is }}</h2>
+    <p class="lead">{{ t.what_is_lead }}</p>
+    <p>{{ t.what_is_p }}</p>
+    <h2>{{ t.the_problem }}</h2>
+    <p>{{ t.the_problem_p }}</p>
+    <h2>{{ t.why_matters }}</h2>
+    <p>{{ t.why_matters_p }}</p>
+    <h2>{{ t.mission }}</h2>
+    <p>{{ t.mission_p }}</p>
+    <h2>{{ t.vision }}</h2>
+    <p>{{ t.vision_p }}</p>
+    <h2>{{ t.how_works }}</h2>
+    <p>{{ t.how_works_p }}</p>
+    <h2>{{ t.who_serves }}</h2>
+    <p>{{ t.who_serves_p }}</p>
+    <h2>{{ t.how_grow }}</h2>
+    <p>{{ t.how_grow_p }}</p>
+  </div>
+  <aside class="founder-note">
+    <div class="eyebrow">{{ t.started }}</div>
+    <h3>{{ t.started_h }}</h3>
+    <p>{{ t.started_p }}</p>
+  </aside>
+</div></section>
+{% endblock %}

@@ -1,0 +1,8 @@
+<nav class="section-nav" aria-label="{{ t.discover }}">
+  <a href="{{ url_for('main.discover') }}" {% if request.endpoint == 'main.discover' %}class="active"{% endif %}>{{ t.areas_eyebrow }}</a>
+  <a href="{{ url_for('main.knowledge') }}" {% if request.endpoint in ['main.knowledge', 'main.knowledge_entry'] %}class="active"{% endif %}>{{ t.knowledge }}</a>
+  <a href="{{ url_for('main.discover_articles') }}" {% if request.endpoint in ['main.discover_articles', 'main.discover_article_impact'] %}class="active"{% endif %}>{{ t.articles }}</a>
+  <a href="{{ url_for('main.events') }}" {% if request.endpoint == 'main.events' %}class="active"{% endif %}>{{ t.events }}</a>
+  <a href="{{ url_for('main.learn') }}" {% if request.endpoint == 'main.learn' %}class="active"{% endif %}>{{ t.learn }}</a>
+  <a href="{{ url_for('main.diaspora') }}" {% if request.endpoint == 'main.diaspora' %}class="active"{% endif %}>{{ t.diaspora_page }}</a>
+</nav>

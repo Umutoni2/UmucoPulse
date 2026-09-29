@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Projects{% endblock %}
+
+{% block content %}
+<section class="page-head">
+  <div class="container">
+    <div class="eyebrow">{{ t.projects_eyebrow }}</div>
+    <h1>{{ t.projects_title }}</h1>
+  </div>
+</section>
+<section class="section white">
+  <div class="container">
+    <form class="toolbar" method="get" action="{{ url_for('main.projects') }}">
+      <input type="search" name="q" value="{{ search or '' }}" placeholder="{{ t.search_projects }}" />
+      <select name="category" onchange="this.form.submit()">
+        <option value="all" {% if active_category == 'all' %}selected{% endif %}>{{ t.all_categories }}</option>
+        <option value="education" {% if active_category == 'education' %}selected{% endif %}>{{ t.education }}</option>
+        <option value="archive" {% if active_category == 'archive' %}selected{% endif %}>{{ t.archive }}</option>
+        <option value="performance" {% if active_category == 'performance' %}selected{% endif %}>{{ t.performance }}</option>
+      </select>
+      <button class="btn small" type="submit">Apply</button>
+    </form>
+    {% if projects %}
+    <div class="grid">
+      {% for project in projects %}
+      <article class="card">
+        <div class="icon">{% if project.category == 'archive' %}◉{% elif project.category == 'performance' %}♪{% else %}✦{% endif %}</div>
+        <span class="tag">{{ project.category }}</span>
+        <h3>{{ project.title }}</h3>
+        <p>{{ project.description }}</p>
+      </article>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty">No projects match your search.</div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

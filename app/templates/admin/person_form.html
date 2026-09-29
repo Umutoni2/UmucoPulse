@@ -1,0 +1,27 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ 'Edit profile' if profile else 'Add person / group' }}{% endblock %}
+{% block content %}
+<div class="admin-page">
+  <p><a href="{{ url_for('admin.people') }}">← People &amp; Groups</a></p>
+  <h1>{{ 'Edit profile' if profile else 'Add a cultural group or person' }}</h1>
+  <form class="admin-form admin-panel" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Name</label><input name="display_name" required value="{{ profile.display_name if profile else '' }}">
+    <label>Profile type</label>
+    <select name="profile_kind">{% for k,l in kinds %}<option value="{{ k }}" {% if profile and profile.profile_kind==k %}selected{% endif %}>{{ l }}</option>{% endfor %}</select>
+    <label>Cultural area</label>
+    <select name="area">{% for a in areas %}<option value="{{ a.id }}" {% if profile and profile.area==a.id %}selected{% endif %}>{{ a.name }}</option>{% endfor %}</select>
+    <label>Description</label><textarea name="bio" rows="4">{{ profile.bio if profile else '' }}</textarea>
+    <label>Location</label><input name="location" value="{{ profile.location if profile else '' }}">
+    <label>Website</label><input name="website" value="{{ profile.website if profile else '' }}">
+    <label>Official social link</label><input name="social_link" value="{{ profile.social_link if profile else '' }}">
+    <label>Cultural practices</label><input name="practices" value="{{ profile.skills if profile else '' }}">
+    <label>Source of information</label><input name="source_info" value="{{ profile.source_info if profile else '' }}">
+    <label>Profile image / logo</label><input type="file" name="photo" accept="image/*">
+    <label>Status</label>
+    <select name="moderation_status">{% for k,l in statuses %}<option value="{{ k }}" {% if profile and profile.moderation_status==k %}selected{% endif %}>{{ l }}</option>{% endfor %}</select>
+    <label class="admin-item-meta"><input type="checkbox" name="curated" {% if profile and profile.curated %}checked{% endif %}> Curated profile</label>
+    <div class="admin-actions"><button class="btn-sm" type="submit">Save</button></div>
+  </form>
+</div>
+{% endblock %}

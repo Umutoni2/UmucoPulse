@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}{{ t.impact }}{% endblock %}
+{% block content %}
+<section class="page-head"><div class="container"><div class="eyebrow">{{ t.impact }}</div><h1>{{ t.impact_so_far }}</h1><p class="lead">{{ t.impact_lead }}</p></div></section>
+<section class="section dark impact-section"><div class="container">
+  <div class="stat-grid">
+    <div class="stat"><strong>{{ impact.creators }}</strong><span>{{ t.stat_people }}</span></div>
+    <div class="stat"><strong>{{ impact.works }}</strong><span>{{ t.stat_works }}</span></div>
+    <div class="stat"><strong>{{ impact.published }}</strong><span>{{ t.stat_stories }}</span></div>
+    <div class="stat"><strong>{{ impact.areas }}</strong><span>{{ t.stat_areas }}</span></div>
+    <div class="stat"><strong>{{ impact.projects }}</strong><span>{{ t.stat_projects }}</span></div>
+    <div class="stat"><strong>{{ impact.collabs }}</strong><span>{{ t.stat_collabs }}</span></div>
+    <div class="stat"><strong>{{ impact.library }}</strong><span>{{ t.stat_library }}</span></div>
+    <div class="stat"><strong>{{ impact.groups }}</strong><span>{{ t.stat_groups }}</span></div>
+  </div>
+  <p class="help">{{ t.impact_note }}</p>
+  <div class="actions"><a class="btn ghost impact-more" href="{{ url_for('main.discover_article_impact') }}">{{ t.article_read }}</a></div>
+</div></section>
+{% endblock %}

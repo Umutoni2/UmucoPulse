@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}{{ t.knowledge }}{% endblock %}
+{% block content %}
+<section class="page-head"><div class="container"><div class="eyebrow">{{ t.discover }}</div><h1>{{ t.knowledge_title }}</h1><p class="lead">{{ t.knowledge_lead }}</p>
+  {% include "partials/discover_nav.html" %}
+</div></section>
+<section class="section white"><div class="container">
+  {% if active %}
+  <article class="card" style="max-width:860px;margin:0 auto 36px">
+    <span class="tag">{{ active.area }}</span>
+    <h2>{{ active.title }}</h2>
+    <p class="lead">{{ active.summary }}</p>
+    <p>{{ active.body }}</p>
+    {% if related %}
+    <h3>{{ t.creators }}</h3>
+    {% for p in related %}
+    <p><a href="{{ url_for('main.creator', profile_id=p.id) }}">{{ p.display_name }}</a></p>
+    {% endfor %}
+    {% endif %}
+  </article>
+  {% endif %}
+  <div class="grid">
+    {% for e in entries %}
+    <article class="card">
+      <span class="tag">{{ e.area }}</span>
+      <h3>{{ e.title }}</h3>
+      <p>{{ e.summary }}</p>
+      <a class="btn small" href="{{ url_for('main.knowledge_entry', entry_id=e.id) }}">{{ t.explore_arrow }}</a>
+    </article>
+    {% endfor %}
+  </div>
+</div></section>
+{% endblock %}

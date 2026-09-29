@@ -1,0 +1,73 @@
+{% extends "admin/base.html" %}
+{% block title %}Statistics{% endblock %}
+{% block content %}
+<div class="admin-page">
+  <h1>Statistics</h1>
+  <p class="admin-subtitle">Counts from this prototype database only — not national or official figures.</p>
+  <div class="stats-grid">
+    <div class="stat-card"><span class="stat-number">{{ kinds.individual }}</span><span class="stat-label">Individuals</span></div>
+    <div class="stat-card"><span class="stat-number">{{ kinds.troupe }}</span><span class="stat-label">Troupes</span></div>
+    <div class="stat-card"><span class="stat-number">{{ kinds.community_group }}</span><span class="stat-label">Community groups</span></div>
+    <div class="stat-card"><span class="stat-number">{{ kinds.organisation }}</span><span class="stat-label">Organisations</span></div>
+    <div class="stat-card"><span class="stat-number">{{ stories }}</span><span class="stat-label">Published stories</span></div>
+    <div class="stat-card"><span class="stat-number">{{ follows }}</span><span class="stat-label">Follows</span></div>
+    <div class="stat-card"><span class="stat-number">{{ collabs }}</span><span class="stat-label">Collaboration requests</span></div>
+    <div class="stat-card"><span class="stat-number">{{ accepted }}</span><span class="stat-label">Accepted collaborations</span></div>
+    <div class="stat-card"><span class="stat-number">{{ public_lib }}</span><span class="stat-label">Public library works</span></div>
+    <div class="stat-card"><span class="stat-number">{{ private_lib }}</span><span class="stat-label">Private / members works</span></div>
+  </div>
+  <div class="chart-grid">
+    <section class="admin-panel"><h2>People by cultural area</h2><div class="chart-box"><canvas id="c1"></canvas></div></section>
+    <section class="admin-panel"><h2>Content types</h2><div class="chart-box"><canvas id="c2"></canvas></div></section>
+    <section class="admin-panel"><h2>Submission status</h2><div class="chart-box"><canvas id="c3"></canvas></div></section>
+    <section class="admin-panel"><h2>Collaboration status</h2><div class="chart-box"><canvas id="c4"></canvas></div></section>
+    <section class="admin-panel"><h2>Moderation</h2><div class="chart-box"><canvas id="c5"></canvas></div></section>
+  </div>
+  <section class="admin-panel">
+    <h2>Moderation outcomes</h2>
+    <p>New reports: {{ mod.new }} · Under review: {{ mod.under_review }} · Resolved: {{ mod.resolved }} · Dismissed: {{ mod.dismissed }} · Suspended profiles: {{ mod.suspended }}</p>
+  </section>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+Chart.defaults.color = '#94A8A0';
+Chart.defaults.borderColor = '#294039';
+const brand = ['#2D80D3','#0F513F','#F5C542','#3BAA78','#63A9ED','#D9A91E'];
+const typeColors = ({{ type_labels|tojson }}).map((label) => {
+  const key = String(label).toLowerCase();
+  if (key.includes('document')) return '#2D80D3';
+  if (key.includes('audio')) return '#63A9ED';
+  if (key.includes('booklet')) return '#0F513F';
+  if (key.includes('video')) return '#3BAA78';
+  if (key.includes('magazine')) return '#F5C542';
+  return '#D9A91E';
+});
+new Chart(document.getElementById('c1'), {
+  type:'bar',
+  data:{ labels: {{ area_labels|tojson }}, datasets:[{ data: {{ area_counts|tojson }}, backgroundColor:'#2D80D3', hoverBackgroundColor:'#F5C542' }]},
+  options:{ plugins:{legend:{display:false}}, maintainAspectRatio:false, scales:{ y:{ beginAtZero:true, ticks:{precision:0}, grid:{color:'#294039'} }, x:{ grid:{display:false} } } }
+});
+new Chart(document.getElementById('c2'), {
+  type:'doughnut',
+  data:{ labels: {{ type_labels|tojson }}, datasets:[{ data: {{ type_values|tojson }}, backgroundColor: typeColors.length ? typeColors : brand }]},
+  options:{ plugins:{legend:{position:'bottom'}}, maintainAspectRatio:false }
+});
+new Chart(document.getElementById('c3'), {
+  type:'doughnut',
+  data:{ labels:['Pending','Approved','Published','Rejected'], datasets:[{ data: {{ status_counts|tojson }}, backgroundColor:['#F5C542','#3BAA78','#0F513F','#C6534C'] }]},
+  options:{ plugins:{legend:{position:'bottom'}}, maintainAspectRatio:false }
+});
+new Chart(document.getElementById('c4'), {
+  type:'bar',
+  data:{ labels: {{ collab_labels|tojson }}, datasets:[{ data: {{ collab_values|tojson }}, backgroundColor:['#F5C542','#2E8B57','#7B8581'] }]},
+  options:{ plugins:{legend:{display:false}}, maintainAspectRatio:false, scales:{ y:{ beginAtZero:true, ticks:{precision:0}, grid:{color:'#294039'} }, x:{ grid:{display:false} } } }
+});
+new Chart(document.getElementById('c5'), {
+  type:'bar',
+  data:{ labels:['New','Under review','Resolved','Dismissed','Suspended'], datasets:[{ data: [{{ mod.new }}, {{ mod.under_review }}, {{ mod.resolved }}, {{ mod.dismissed }}, {{ mod.suspended }}], backgroundColor:['#F5C542','#2D80D3','#2E8B57','#7B8581','#C6534C'] }]},
+  options:{ plugins:{legend:{display:false}}, maintainAspectRatio:false, scales:{ y:{ beginAtZero:true, ticks:{precision:0}, grid:{color:'#294039'} }, x:{ grid:{display:false} } } }
+});
+</script>
+{% endblock %}

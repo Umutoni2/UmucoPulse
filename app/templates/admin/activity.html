@@ -1,0 +1,15 @@
+{% extends "admin/base.html" %}
+{% block title %}Activity log{% endblock %}
+{% block content %}
+<div class="admin-page">
+  <h1>Activity log</h1>
+  <p class="admin-subtitle">A record of major admin actions on this prototype.</p>
+  <ul class="activity-list">
+    {% for log in logs %}
+    <li><strong>{{ log.action }}</strong> — {{ log.item }} <time>{{ log.created_at.strftime('%d %b %Y %H:%M') }} · {{ log.admin_name }}</time></li>
+    {% else %}
+    <li>No actions yet.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

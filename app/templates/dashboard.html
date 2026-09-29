@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}{{ t.dashboard }}{% endblock %}
+{% block content %}
+<section class="page-head">
+  <div class="container">
+    <div class="eyebrow">{{ t.dash_eyebrow }}</div>
+    <h1>{{ t.welcome }}, {{ current_user.name }}</h1>
+    <p class="lead">{{ t.dash_lead }}</p>
+    {% include "partials/account_nav.html" %}
+  <p class="help">{% if profile and profile.is_public %}{{ t.public_profile }}{% else %}{{ t.not_public }}{% endif %}</p>
+  <div class="actions">
+    <a class="btn blue" href="{{ url_for('main.profile') }}">{{ t.my_profile }}</a>
+    <a class="btn" href="{{ url_for('main.submit_story') }}">{{ t.submit_cultural }}</a>
+    <a class="btn ghost" href="{{ url_for('main.creators') }}">{{ t.browse_creators }}</a>
+  </div>
+  </div>
+</section>
+<section class="section white">
+  <div class="container">
+    <div class="stat-grid">
+      <div class="stat"><strong>{{ stats.total }}</strong>{{ t.total_sub }}</div>
+      <div class="stat"><strong>{{ stats.pending }}</strong>{{ t.pending_review }}</div>
+      <div class="stat"><strong>{{ stats.published }}</strong>{{ t.published }}</div>
+      <div class="stat"><strong>✓</strong>{{ t.consent_req }}</div>
+    </div>
+    <h2 id="stories" style="margin-top:36px">{{ t.story_subs }}</h2>
+    <div style="overflow:auto">
+      <table>
+        <thead>
+          <tr><th>{{ t.story }}</th><th>{{ t.type }}</th><th>{{ t.status }}</th><th>{{ t.date }}</th><th>{{ t.feedback }}</th></tr>
+        </thead>
+        <tbody>
+          {% for s in submissions %}
+          <tr>
+            <td><strong>{{ s.title }}</strong></td>
+            <td>{{ s.story_type }}</td>
+            <td><span class="badge {{ s.status }}">{{ s.status }}</span></td>
+            <td>{{ s.created_at.strftime('%d %b %Y') }}</td>
+            <td>{{ s.admin_notes or '—' }}</td>
+          </tr>
+          {% else %}
+          <tr><td colspan="5"><div class="empty">{{ t.no_subs }}</div></td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <h2 id="connections" style="margin-top:36px">{{ t.collab_received }}</h2>
+    <div style="overflow:auto">
+      <table>
+        <thead><tr><th>{{ t['from'] }}</th><th>{{ t.type }}</th><th>{{ t.message }}</th><th>{{ t.status }}</th><th>{{ t.action }}</th></tr></thead>
+        <tbody>
+          {% for c in collabs %}
+          <tr>
+            <td>{{ c.from_name }}</td>
+            <td>{{ c.request_type }}</td>
+            <td>{{ c.message }}</td>
+            <td><span class="badge {{ c.status|lower }}">{{ c.status }}</span></td>
+            <td>
+              {% if c.status == 'Pending' %}
+              <form method="post" action="{{ url_for('main.set_collaboration', req_id=c.id, action='Accepted') }}" style="display:inline">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button class="btn success small" type="submit">{{ t.accept }}</button>
+              </form>
+              <form method="post" action="{{ url_for('main.set_collaboration', req_id=c.id, action='Declined') }}" style="display:inline">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button class="btn danger small" type="submit">{{ t.decline }}</button>
+              </form>
+              {% else %}{{ c.status }}{% endif %}
+            </td>
+          </tr>
+          {% else %}
+          <tr><td colspan="5"><div class="empty">{{ t.no_collabs }}</div></td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% include "partials/meet_same_art.html" %}
+  </div>
+</section>
+{% endblock %}

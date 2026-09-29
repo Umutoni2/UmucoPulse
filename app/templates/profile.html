@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}{{ t.my_profile }}{% endblock %}
+{% block content %}
+<section class="page-head"><div class="container"><div class="eyebrow">{{ t.profile_eyebrow }}</div><h1>{{ t.profile_title }}</h1><p class="lead">{{ t.profile_lead }}</p>{% include "partials/account_nav.html" %}<div class="actions"><a class="btn ghost" href="{{ url_for('main.dashboard') }}">{{ t.back_dash }}</a></div></div></section>
+<section class="section white"><div class="container">
+  <form class="form-card wide" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="form" value="profile">
+    <label>{{ t.display_name }}</label>
+    <input name="display_name" value="{{ profile.display_name }}" required>
+    <label>{{ t.profile_type }}</label>
+    <select name="profile_kind">
+      <option value="individual" {% if profile.profile_kind=='individual' %}selected{% endif %}>{{ t.kind_individual }}</option>
+      <option value="troupe" {% if profile.profile_kind=='troupe' %}selected{% endif %}>{{ t.kind_troupe }}</option>
+      <option value="community_group" {% if profile.profile_kind=='community_group' %}selected{% endif %}>{{ t.kind_community }}</option>
+      <option value="organisation" {% if profile.profile_kind=='organisation' %}selected{% endif %}>{{ t.kind_organisation }}</option>
+    </select>
+    <label>{{ t.primary_area }}</label>
+    <select name="area">
+      {% for a in areas %}<option value="{{ a.id }}" {% if profile.area==a.id %}selected{% endif %}>{{ a.name }}</option>{% endfor %}
+    </select>
+    <label>{{ t.role_practice }}</label>
+    <input name="role" value="{{ profile.role }}">
+    <label>{{ t.location }}</label>
+    <input name="location" value="{{ profile.location }}">
+    <label>{{ t.languages }}</label>
+    <input name="languages" value="{{ profile.languages }}">
+    <label>{{ t.short_bio }}</label>
+    <textarea name="bio" rows="4">{{ profile.bio }}</textarea>
+    <label>{{ t.cultural_context }}</label>
+    <textarea name="background" rows="4">{{ profile.background }}</textarea>
+    <label>{{ t.skills_practices }}</label>
+    <textarea name="skills" rows="3">{{ profile.skills }}</textarea>
+    <label>{{ t.community }}</label>
+    <textarea name="community_note" rows="3">{{ profile.community_note }}</textarea>
+    <label>{{ t.official_website }}</label>
+    <input name="website" type="url" value="{{ profile.website or '' }}" placeholder="https://">
+    <label>{{ t.optional_photo }}</label>
+    <input name="photo" type="file" accept="image/*">
+    <p class="help">{{ t.photo_soon }}</p>
+    <p><strong>{{ t.available_for }}</strong></p>
+    <div class="check-pills">
+      {% for o in avail_options %}
+      <label class="check-pill"><input type="checkbox" name="available" value="{{ o }}" {% if o in profile.available_list() %}checked{% endif %}> {{ o }}</label>
+      {% endfor %}
+    </div>
+    <div class="checkbox"><input type="checkbox" name="is_public" id="is_public" {% if profile.is_public %}checked{% endif %}><label for="is_public" style="margin:0">{{ t.make_public }}</label></div>
+    <div class="actions"><button class="btn clay" type="submit">{{ t.save_profile }}</button></div>
+  </form>
+  <form id="portfolio" class="form-card wide" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="form" value="portfolio">
+    <h2>{{ t.add_portfolio }}</h2>
+    <p class="help">{{ t.port_help }}</p>
+    <label>{{ t.title }}</label><input name="title" required>
+    <label>{{ t.type }}</label>
+    <select name="item_type">{% for ptype in portfolio_types %}<option>{{ ptype }}</option>{% endfor %}</select>
+    <label>{{ t.description }}</label><textarea name="description" rows="3" required></textarea>
+    <label>{{ t.cultural_context }}</label><textarea name="context" rows="3"></textarea>
+    <label>{{ t.optional_link }}</label><input name="link" type="url">
+    <label>{{ t.date }}</label><input name="date_label" type="date">
+    <label>{{ t.optional_media }}</label><input name="media" type="file">
+    <div class="actions"><button class="btn" type="submit">{{ t.add_to_port }}</button></div>
+  </form>
+  <div class="grid" style="max-width:980px;margin:0 auto 40px">
+    {% for w in works %}
+    <article class="card"><strong>{{ w.title }}</strong><p class="story-meta">{{ w.item_type }}</p>
+      <form method="post" action="{{ url_for('main.delete_portfolio', item_id=w.id) }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="btn danger small" type="submit">{{ t.remove }}</button>
+      </form>
+    </article>
+    {% endfor %}
+  </div>
+</div></section>
+{% endblock %}

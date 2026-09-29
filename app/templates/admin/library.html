@@ -1,0 +1,53 @@
+{% extends "admin/base.html" %}
+{% block title %}Content Library{% endblock %}
+{% block content %}
+<div class="admin-page">
+  <div class="page-toolbar">
+    <div>
+      <h1>Cultural Content Library</h1>
+      <p class="admin-subtitle">Documentaries, booklets, pamphlets, magazines, notebooks, audio, video and guides. File names only in this prototype.</p>
+    </div>
+    <a class="btn-sm btn-gold" href="{{ url_for('admin.library_new') }}">+ Add new content</a>
+  </div>
+  <nav class="admin-tabs">
+    {% for tab in tabs %}
+    <a href="{{ url_for('admin.library', type=tab) }}" class="{{ 'active' if kind==tab else '' }}">{{ tab }}</a>
+    {% endfor %}
+  </nav>
+  <div class="admin-table-wrap">
+  <table class="admin-table">
+    <thead><tr><th>Cover</th><th>Title</th><th>Type</th><th>Cultural area</th><th>Creator</th><th>Visibility</th><th>Status</th><th>Updated</th></tr></thead>
+    <tbody>
+      {% for item in items %}
+      <tr>
+        <td><div class="cover-tile type-{{ item.content_type|lower }}">{{ item.title[:1] }}</div></td>
+        <td>
+          <div>{{ item.title }}{% if item.file_name %}<div class="help">{{ item.file_name }}</div>{% endif %}</div>
+          <div class="action-bar-inline">
+            <a class="btn-sm btn-clay" href="{{ url_for('admin.library_edit', item_id=item.id) }}">Edit</a>
+            <details class="action-more">
+              <summary>More</summary>
+              <div class="action-more-panel">
+                <a class="btn-sm btn-approve" href="{{ url_for('admin.library_action', item_id=item.id, action='publish') }}">Publish</a>
+                <a class="btn-sm btn-ghost" href="{{ url_for('admin.library_action', item_id=item.id, action='unpublish') }}">Unpublish</a>
+                <a class="btn-sm" href="{{ url_for('admin.library_action', item_id=item.id, action='archive') }}">Archive</a>
+                <a class="btn-sm btn-danger" href="{{ url_for('admin.library_action', item_id=item.id, action='delete') }}">Delete</a>
+              </div>
+            </details>
+          </div>
+        </td>
+        <td>{{ item.content_type }}</td>
+        <td>{{ area_labels.get(item.area, item.area) }}</td>
+        <td>{{ item.author or '—' }}</td>
+        <td>{{ item.visibility }}</td>
+        <td><span class="badge badge-{{ item.status }}">{{ item.status }}</span></td>
+        <td>{{ item.created_at.strftime('%d %b %Y') }}</td>
+      </tr>
+      {% else %}
+      <tr><td colspan="9">No library items in this view.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</div>
+{% endblock %}

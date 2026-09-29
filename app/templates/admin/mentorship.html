@@ -1,0 +1,26 @@
+{% extends "admin/base.html" %}
+{% block title %}Mentorship Requests{% endblock %}
+
+{% block content %}
+<div class="admin-page">
+  <h1>Mentorship requests</h1>
+  {% if requests %}
+  <table class="admin-table">
+    <thead><tr><th>Name</th><th>Type</th><th>Focus</th><th>Details</th><th>Date</th></tr></thead>
+    <tbody>
+      {% for item in requests %}
+      <tr>
+        <td>{{ item.name }}<br><span class="text-muted">{{ item.email }}</span></td>
+        <td>{{ item.request_type }}</td>
+        <td>{{ item.focus_area }}</td>
+        <td>{{ item.details }}</td>
+        <td>{{ item.created_at.strftime('%d %b %Y') }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="empty-state">No mentorship requests yet.</p>
+  {% endif %}
+</div>
+{% endblock %}

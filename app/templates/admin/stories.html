@@ -1,0 +1,43 @@
+{% extends "admin/base.html" %}
+{% block title %}Submissions{% endblock %}
+{% block content %}
+<div class="admin-page">
+  <h1>Submissions</h1>
+  <p class="admin-subtitle">Review consent and cultural context before anything is published.</p>
+  <nav class="admin-tabs">
+    {% for key, label in [('all','All'),('pending','Pending'),('approved','Approved'),('published','Published'),('rejected','Rejected')] %}
+    <a href="{{ url_for('admin.stories', status=key) }}" class="{{ 'active' if status==key else '' }}">{{ label }}</a>
+    {% endfor %}
+  </nav>
+  <form class="admin-toolbar" method="get">
+    <input type="hidden" name="status" value="{{ status }}">
+    <input type="search" name="q" value="{{ q }}" placeholder="Search title or contributor">
+    <select name="category">
+      <option value="all">All categories</option>
+      {% for a in ['oral','music','dance','poetry','craft','diaspora'] %}
+      <option value="{{ a }}" {% if category==a %}selected{% endif %}>{{ a }}</option>
+      {% endfor %}
+    </select>
+    <button class="btn-sm" type="submit">Filter</button>
+  </form>
+  <table class="admin-table">
+    <thead><tr><th>Title</th><th>Contributor</th><th>Area</th><th>Type</th><th>Consent</th><th>Date</th><th>Status</th><th></th></tr></thead>
+    <tbody>
+      {% for s in submissions %}
+      <tr>
+        <td>{{ s.title }}</td>
+        <td>{{ s.name }}</td>
+        <td>{{ s.category }}</td>
+        <td>{{ s.story_type }}</td>
+        <td>{{ 'Yes' if s.consent else 'No' }}</td>
+        <td>{{ s.created_at.strftime('%d %b %Y') }}</td>
+        <td><span class="badge badge-{{ s.status }}">{{ s.status }}</span></td>
+        <td><a class="btn-sm" href="{{ url_for('admin.story_review', story_id=s.id) }}">Review</a></td>
+      </tr>
+      {% else %}
+      <tr><td colspan="8">No submissions in this view.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

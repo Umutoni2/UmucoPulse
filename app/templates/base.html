@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="{{ current_lang or 'en' }}">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="UmucoPulse is a community-centred platform for preserving and sharing Rwandan cultural heritage." />
+  <title>{% block title %}UmucoPulse{% endblock %} | UmucoPulse</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  {% block extra_css %}{% endblock %}
+</head>
+<body id="top">
+  {% include 'partials/header.html' %}
+  {% include 'partials/flash.html' %}
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+  {% include 'partials/footer.html' %}
+  <button class="back-to-top" type="button" aria-label="{{ t.back_to_top }}"></button>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

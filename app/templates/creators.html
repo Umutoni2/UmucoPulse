@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}{{ t.creators }}{% endblock %}
+{% block content %}
+<section class="page-head"><div class="container"><div class="eyebrow">{{ t.creators }}</div><h1>{{ t.dir_title }}</h1><p class="lead">{{ t.dir_lead }}</p></div></section>
+<section class="section white"><div class="container">
+  <form class="toolbar" method="get">
+    <input type="search" name="q" value="{{ q }}" placeholder="{{ t.search_ph }}">
+    <select name="kind" onchange="this.form.submit()">
+      <option value="all" {% if kind=='all' %}selected{% endif %}>{{ t.all_kinds }}</option>
+      <option value="individual" {% if kind=='individual' %}selected{% endif %}>{{ t.kind_individual }}</option>
+      <option value="troupe" {% if kind=='troupe' %}selected{% endif %}>{{ t.kind_troupe }}</option>
+      <option value="community_group" {% if kind=='community_group' %}selected{% endif %}>{{ t.kind_community }}</option>
+      <option value="organisation" {% if kind=='organisation' %}selected{% endif %}>{{ t.kind_organisation }}</option>
+    </select>
+    <select name="location" onchange="this.form.submit()">
+      <option value="all" {% if location=='all' %}selected{% endif %}>{{ t.loc_all }}</option>
+      <option value="kigali" {% if location=='kigali' %}selected{% endif %}>{{ t.loc_kigali }}</option>
+      <option value="huye" {% if location=='huye' %}selected{% endif %}>{{ t.loc_huye }}</option>
+      <option value="musanze" {% if location=='musanze' %}selected{% endif %}>{{ t.loc_musanze }}</option>
+      <option value="nyamata" {% if location=='nyamata' %}selected{% endif %}>{{ t.loc_nyamata }}</option>
+      <option value="diaspora" {% if location=='diaspora' %}selected{% endif %}>{{ t.loc_diaspora }}</option>
+      <option value="unlisted" {% if location=='unlisted' %}selected{% endif %}>{{ t.loc_unlisted }}</option>
+    </select>
+    <select name="area" onchange="this.form.submit()">
+      <option value="all" {% if area=='all' %}selected{% endif %}>{{ t.all_areas }}</option>
+      {% for a in areas %}
+      <option value="{{ a.id }}" {% if area==a.id %}selected{% endif %}>{{ a.name }}</option>
+      {% endfor %}
+    </select>
+    <button class="btn small" type="submit">{{ t.search }}</button>
+  </form>
+  <div class="grid">
+    {% for p in profiles %}
+    <article class="card creator-card">
+      {% if p.photo %}
+      <div class="avatar has-photo"><img src="{{ url_for('static', filename='uploads/profiles/' + p.photo) }}" alt=""></div>
+      {% else %}
+      <div class="avatar{% if p.profile_kind in ['troupe','community_group'] %} photo-ready{% endif %}">{{ p.initials() }}</div>
+      {% endif %}
+      <div>
+        {% if p.is_demo %}<span class="tag demo-tag">{{ t.demo_profile }}</span>{% endif %}
+        {% if p.profile_kind == 'troupe' %}<span class="tag">{{ t.kind_troupe_one }}</span>{% elif p.profile_kind == 'community_group' %}<span class="tag">{{ t.kind_community }}</span>{% elif p.profile_kind == 'organisation' %}<span class="tag">{{ t.kind_organisation }}</span>{% elif p.profile_kind == 'individual' %}<span class="tag">{{ t.kind_individual }}</span>{% endif %}
+        {% if p.curated %}<span class="tag curated">{{ t.reviewed }}</span>{% endif %}
+      </div>
+      <h3>{{ p.display_name }}</h3>
+      <p class="story-meta">{% if p.profile_kind == 'troupe' %}{{ t.kind_troupe_one }}{% elif p.profile_kind == 'organisation' %}{{ t.kind_organisation }}{% elif p.profile_kind == 'community_group' %}{{ t.kind_community }}{% else %}{{ p.role or t.practitioner }}{% endif %} · {{ area_name(p.area) }}</p>
+      {% if p.location %}<p class="story-meta">{{ p.location }}</p>{% endif %}
+      <p>{{ (p.bio or '')[:140] }}</p>
+      {% if p.practices_list() %}
+      <p class="story-meta">{{ t.practices }}: {{ p.practices_list()|join(' · ') }}</p>
+      {% endif %}
+      <p class="story-meta">{{ counts[p.id][0] }} {{ t.works }} · {{ counts[p.id][1] }} {{ t.followers }}</p>
+      <div class="actions">
+        <a class="btn small" href="{{ url_for('main.creator', profile_id=p.id) }}">{{ t.view_profile }}</a>
+        {% if current_user.is_authenticated and p.user_id != current_user.id %}
+        <form method="post" action="{{ url_for('main.follow_creator', profile_id=p.id) }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button class="btn ghost small" type="submit">{% if p.id in follow_ids %}{{ t.following }}{% else %}{{ t.follow }}{% endif %}</button>
+        </form>
+        <a class="btn ghost small" href="{{ url_for('main.creator', profile_id=p.id) }}#collab">{{ t.request_collab }}</a>
+        {% endif %}
+        {% if p.website %}
+        <a class="btn ghost small" href="{{ p.website }}" rel="noopener noreferrer" target="_blank">{{ t.visit_website }}</a>
+        {% endif %}
+      </div>
+    </article>
+    {% else %}
+    <div class="empty">{{ t.no_creators }}</div>
+    {% endfor %}
+  </div>
+</div></section>
+{% endblock %}

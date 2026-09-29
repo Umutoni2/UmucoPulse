@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}{{ t.discover }}{% endblock %}
+{% block content %}
+<section class="page-head"><div class="container">
+  <div class="eyebrow">{{ t.discover_eyebrow }}</div>
+  <h1>{{ t.discover_title }}</h1>
+  <p class="lead">{{ t.discover_lead }}</p>
+  {% include "partials/discover_nav.html" %}
+</div></section>
+<section class="section white"><div class="container">
+  <div class="grid">
+    <article class="card"><h3>{{ t.areas_eyebrow }}</h3><p>{{ t.areas_lead }}</p><a class="btn small" href="#cultural-areas">{{ t.explore_arrow }}</a></article>
+    <article class="card"><h3>{{ t.knowledge }}</h3><p>{{ t.knowledge_lead }}</p><a class="btn small" href="{{ url_for('main.knowledge') }}">{{ t.open_knowledge }}</a></article>
+    <article class="card"><h3>{{ t.articles }}</h3><p>{{ t.articles_lead }}</p><a class="btn small" href="{{ url_for('main.discover_articles') }}">{{ t.article_read }}</a></article>
+    <article class="card"><h3>{{ t.events }}</h3><p>{{ t.events_lead }}</p><a class="btn small" href="{{ url_for('main.events') }}">{{ t.open_events }}</a></article>
+    <article class="card"><h3>{{ t.learn }}</h3><p>{{ t.learn_lead }}</p><a class="btn small" href="{{ url_for('main.learn') }}">{{ t.learn }}</a></article>
+    <article class="card"><h3>{{ t.diaspora_page }}</h3><p>{{ t.diaspora_lead }}</p><a class="btn small" href="{{ url_for('main.diaspora') }}">{{ t.diaspora_page }}</a></article>
+  </div>
+</div></section>
+<section class="section" id="cultural-areas"><div class="container">
+  <div class="section-head"><div><div class="eyebrow">{{ t.areas_eyebrow }}</div><h2>{{ t.areas_title }}</h2></div><p>{{ t.areas_lead }}</p></div>
+  <div class="grid two">
+    {% for a in areas %}
+    <article class="card area-card" id="{{ a.id }}">
+      <div class="icon">{{ a.icon }}</div>
+      <h2>{{ a.name }}</h2>
+      <p><strong>{{ t.lbl_meaning }}</strong> {{ a.meaning }}</p>
+      <p><strong>{{ t.lbl_people }}</strong> {{ a.people }}</p>
+      <p><strong>{{ t.lbl_preserve }}</strong> {{ a.preserve }}</p>
+      <p><strong>{{ t.lbl_upload }}</strong> {{ a.upload }}</p>
+      <p><strong>{{ t.lbl_participate }}</strong> {{ a.participate }}</p>
+      <p><strong>{{ t.lbl_connect }}</strong> {{ a.connect }}</p>
+      <div class="actions">
+        <a class="btn blue small" href="{{ url_for('main.creators', area=a.id) }}">{{ t.meet_practitioners }}</a>
+        <a class="btn ghost small" href="{{ url_for('auth.register') }}">{{ t.create_a_profile }}</a>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</div></section>
+{% endblock %}
