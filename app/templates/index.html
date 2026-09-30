@@ -2,8 +2,14 @@
 {% block title %}{{ t.home }}{% endblock %}
 {% block content %}
 <section class="hero">
+  <div class="hero-media" aria-hidden="true" style="background-image:url('{{ url_for('static', filename='assets/hero-culture.jpg') }}')">
+    <video autoplay muted loop playsinline poster="{{ url_for('static', filename='assets/hero-culture.jpg') }}">
+      <source src="{{ url_for('static', filename='assets/hero-dance.webm') }}" type="video/webm">
+    </video>
+  </div>
+  <div class="hero-veil" aria-hidden="true"></div>
   <div class="container hero-grid">
-    <div>
+    <div class="hero-copy">
       <div class="eyebrow">{{ t.hero_eyebrow }}</div>
       <h1>{{ t.hero_title_lead }} <span class="accent">{{ t.hero_title_accent }}</span></h1>
       <p class="lead">{{ t.hero_sub }}</p>
@@ -12,10 +18,8 @@
         <a class="btn" href="{{ url_for('main.creators') }}">{{ t.meet_creators }}</a>
         <a class="btn ghost" href="{{ url_for('auth.register') }}">{{ t.share_story }}</a>
       </div>
+      <p class="hero-credit">{{ t.hero_video_credit }}</p>
     </div>
-    <aside class="hero-art">
-      <img src="{{ url_for('static', filename='assets/hero-culture.jpg') }}" alt="{{ t.hero_quote }}">
-    </aside>
   </div>
 </section>
 <section class="section white">
