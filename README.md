@@ -1,92 +1,167 @@
 # UmucoPulse
 
-A Rwandan cultural heritage platform for documenting stories, showcasing practitioners, and growing a community archive.
+A Rwandan cultural heritage platform for documenting stories, showcasing cultural practitioners, and building a community archive.
 
-- **Public demo (GitHub Pages):** https://umutoni2.github.io/UmucoPulse/
-- **Source code:** https://github.com/umutoni2/UmucoPulse
-- **SRS:** [SRS.md](./SRS.md)
-
-If the Pages site still shows the old static homepage after you push, open the repository **Settings → Pages**, set **Source** to **Deploy from a branch**, branch **master** (or **main**), folder **/docs**, then Save. The public URL stays:
-
-`https://umutoni2.github.io/UmucoPulse/`
-
+* **Live Demo (Render):** [https://umucopulse.onrender.com/]
+* **Source Code:** https://github.com/umutoni2/UmucoPulse
+* **SRS:** https://drive.google.com/file/d/1oDTsxYcGhEV7IFH40yBdwD-M7Fi-1KFc/view?usp=drive_link
 ---
 
 ## What this project contains
 
-| Location | What it is |
-|----------|------------|
-| `app/` + `run.py` | **Version 2 — Flask app** with database, signup/login, contributor dashboard, admin review workflow |
-| `docs/` | **Public GitHub Pages prototype** (HTML/CSS/JS). Same actors and screens, stored in the browser so graders can use a public URL without installing Python |
-| `legacy/` | Original class portfolio site (first static version) |
+UmucoPulse is a web platform designed to help preserve and share Rwandan cultural heritage through digital storytelling and community participation.
 
-### Actors (system design)
+The project has three main parts:
 
-- **Visitor** — Home, Discover, Creators, Voices, Projects, Opportunities, About, Contact
-- **Contributor** — register, profile, portfolio, stories with consent, follow, collaboration requests
-- **Administrator** — review consent, approve/reject/publish, projects, messages, curated profiles, simple statistics
+| **Location**      | **What it is**                                                                                                              |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `app/` + `run.py` | **Main Flask application** with authentication, database, contributor profiles, story submissions, and administrator review |
+| `docs/`           | **GitHub Pages prototype** of the platform and its main user flows                                                          |
+| `legacy/`         | Original static version of the project                                                                                      |
 
-### Processes demonstrated
-
-1. Browse cultural areas, creators, voices, projects and demo opportunities
-2. Register → build a cultural profile → add a portfolio note → submit a story with consent
-3. Admin: Pending → Approve or Reject (with feedback) → Publish to Voices
-4. Follow a creator and send a collaboration request (Pending / Accepted / Declined)
-5. EN / RW / FR labels on the homepage (not a full translation of every page)
+The **Flask application is the main version of the project and is deployed on Render**. The GitHub Pages version is kept as a prototype and alternative way of viewing the interface.
 
 ---
 
-## Demo accounts
+## Actors
 
-Use these on both the Flask app and the GitHub Pages prototype:
+### Visitor
 
-| Role | Email | Password |
-|------|--------|----------|
-| Administrator | `admin@umucopulse.org` | `Umuco123!` |
-| Contributor | `sylvie@umucopulse.org` | `Story123!` |
+Visitors can:
 
-On GitHub Pages the contributor account is created when you register. The administrator account is created the first time the Pages site loads.
+* View the home page
+* Discover cultural content
+* View creators and their work
+* Read published stories and voices
+* View projects and opportunities
+* Learn more about UmucoPulse
+* Send messages through the contact page
 
-**Prototype limits:** Pages data is only in the current browser (`localStorage`). Media controls store file names, not files. Authentication is a class demo, not production security. Seeded creator profiles and opportunity listings are fictional and labelled as demo content. UmucoPulse does not claim government endorsement or real institutional partners.
+### Contributor
 
-Change these passwords before any real-world use.
+Contributors can:
+
+* Create an account
+* Create and update their cultural profile
+* Make their profile public
+* Add portfolio information
+* Submit cultural stories
+* Give consent when submitting stories
+* Follow creators
+* Send collaboration requests
+
+### Administrator
+
+Administrators can:
+
+* Review submitted stories
+* Approve or reject submissions
+* Provide feedback on rejected submissions
+* Publish approved stories
+* Manage projects
+* Manage messages
+* Manage curated creator profiles
+* View simple platform statistics
 
 ---
 
-## A. Run the Flask application (recommended for the video demo)
+## Main Processes Demonstrated
 
-You need **Python 3.10 or newer**. On Windows, `python` should open from PowerShell or Command Prompt.
+The main user flows in the application include:
 
-### 1. Open the project folder
+1. Browse the different cultural sections of the platform
+2. Register as a contributor
+3. Create a cultural profile
+4. Add portfolio information
+5. Submit a cultural story with consent
+6. Log in as an administrator
+7. Review a submitted story
+8. Approve or reject the story
+9. Publish an approved story
+10. View the published story under Voices
+11. Follow a creator
+12. Send a collaboration request
+13. Accept or decline a collaboration request
 
-```bash
-cd C:\Users\USER\UmucoPulse
-```
+The homepage also includes English, Kinyarwanda and French language labels.
 
-If you cloned from GitHub:
+---
+
+## Demo Accounts
+
+The following accounts can be used to test the application:
+
+| **Role**      | **Email**               | **Password** |
+| ------------- | ----------------------- | ------------ |
+| Administrator | `admin@umucopulse.org`  | `Umuco123!`  |
+| Contributor   | `sylvie@umucopulse.org` | `Story123!`  |
+
+These accounts are provided for demonstration purposes.
+
+The application is a student/class project, so the authentication and other security features should not be considered production-ready.
+
+**Please change the passwords before using the system for real-world purposes.**
+
+---
+
+# A. Use the Live Render Application
+
+The easiest way to test UmucoPulse is through the live Render deployment:
+
+**Live Demo:** [https://umucopulse.onrender.com/]
+
+You can open the link directly in a browser without installing Python or cloning the repository.
+
+### Suggested Demo Flow
+
+1. Open the home page
+2. Explore Discover, Creators, Voices, Projects and Opportunities
+3. Log in as a contributor
+4. Open the cultural profile
+5. Make the profile public
+6. Add a portfolio note
+7. Submit a cultural story
+8. Include the required consent
+9. Log out
+10. Log in as the administrator
+11. Open Story Submissions
+12. Review the submitted story
+13. Approve and publish it
+14. Open Voices and confirm that the story is visible
+15. Follow a creator
+16. Send a collaboration request
+17. Check the request status
+
+---
+
+# B. Run the Flask Application Locally
+
+If you want to run the project locally, you need **Python 3.10 or newer**.
+
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/umutoni2/UmucoPulse.git
 cd UmucoPulse
 ```
 
-### 2. Create and activate a virtual environment
+### 2. Create a virtual environment
 
-**Windows (PowerShell):**
+**Windows PowerShell:**
 
-```powershell
+```bash
 python -m venv venv
 .\venv\Scripts\Activate.ps1
 ```
 
-If PowerShell blocks the script, run:
+If PowerShell blocks the activation script:
 
-```powershell
+```bash
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 .\venv\Scripts\Activate.ps1
 ```
 
-**Windows (Command Prompt):**
+**Windows Command Prompt:**
 
 ```cmd
 python -m venv venv
@@ -100,98 +175,101 @@ python3 -m venv venv
 source venv/bin/activate
 ```
 
-You should see `(venv)` at the start of the line.
-
-### 3. Install dependencies
+### 3. Install the dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. (Optional) environment file
-
-Copy `.env.example` to `.env` only if you want custom secrets. Defaults already work for local demo:
-
-- Admin: `admin@umucopulse.org` / `Umuco123!`
-
-### 5. Start the server
+### 4. Start the application
 
 ```bash
 python run.py
 ```
 
-### 6. Open the site
+### 5. Open the application
 
-In a browser go to:
+Go to:
 
 **http://127.0.0.1:5000**
 
-You should see the UmucoPulse home page.
+The UmucoPulse home page should appear.
 
-### 7. Stop the server
+### 6. Stop the application
 
-In the terminal press `Ctrl + C`.
+Press:
 
-### Flask pages to click during the demo
-
-1. Home, Discover, Creators, Voices, Projects, Opportunities, About, Contact
-2. Sign up → My cultural profile (make public) → Submit a story (tick consent)
-3. Log out → Log in as administrator → Story Submissions → Approve → Publish
-4. Open Voices and confirm the community story is listed
-5. Follow a demo creator and send a collaboration request
-6. Newsletter in the footer; EN / RW / FR in the header (homepage labels)
+```text
+Ctrl + C
+```
 
 ---
 
-## B. Run the public Pages prototype locally (no Flask)
+# C. GitHub Pages Prototype
 
-This uses the files in `docs/` (same flow as the live GitHub Pages URL).
+The project also contains a static prototype inside the `docs/` folder.
+
+It can be used to view the interface without running the Flask application.
+
+To run it locally:
 
 ```bash
 cd docs
 python -m http.server 8000
 ```
 
-Open **http://localhost:8000**
+Then open:
 
-Do not open the HTML file by double-clicking if login/register misbehaves; use this local server.
+**http://localhost:8000**
 
----
-
-## C. Deploy Flask on Render (optional extra public URL)
-
-1. Push this repository to GitHub (public).
-2. Go to [https://render.com](https://render.com) and sign in with GitHub.
-3. **New → Web Service →** select `umutoni2/UmucoPulse`.
-4. Runtime: **Python**. Build: `pip install -r requirements.txt`. Start: `gunicorn run:app`.
-5. Add environment variables `SECRET_KEY`, `ADMIN_EMAIL`, `ADMIN_PASSWORD`.
-6. Deploy. Copy the `onrender.com` URL into your Google Doc as a second live link.
-
-The SQLite database on the free Render plan resets when the service sleeps; that is acceptable for a class demo. GitHub Pages remains the stable public URL.
+The GitHub Pages version uses browser `localStorage` for its demo data. It is mainly intended as a prototype and does not replace the main Flask application.
 
 ---
 
-## Project structure
+## Project Structure
 
-```
+```text
 UmucoPulse/
 ├── app/                  Flask application
 │   ├── models.py
 │   ├── forms.py
-│   ├── routes/           public, auth, admin
+│   ├── routes/
+│   │   ├── public.py
+│   │   ├── auth.py
+│   │   └── admin.py
 │   ├── templates/
 │   └── static/
-├── docs/                 GitHub Pages public prototype
-├── legacy/               original static portfolio
+├── docs/                 GitHub Pages prototype
+├── legacy/               Original static version
 ├── config.py
 ├── run.py
 ├── requirements.txt
 ├── SRS.md
-└── README.md             this file
+└── README.md
 ```
+
+---
+
+## Notes
+
+* The Render deployment is the main public version of UmucoPulse.
+* The GitHub Pages version is a static prototype.
+* Demo data and creator profiles are for demonstration purposes.
+* Media controls store file names rather than uploading actual media files.
+* Authentication is implemented for the project demonstration and is not intended to be used as production-level security.
+* The project does not claim government endorsement or real institutional partnerships.
+
+---
 
 ## Author
 
-Sylvie Umutoni Rutaganira  
-Introduction to Software Engineering  
-GitHub: [umutoni2](https://github.com/umutoni2)
+**Sylvie Umutoni Rutaganira**
+
+BSc Software Engineering
+African Leadership College of Higher Education
+
+**Module:** Introduction to Software Engineering
+
+**GitHub:** https://github.com/umutoni2
+
+**Project:** UmucoPulse — Rwandan Cultural Heritage Platform
