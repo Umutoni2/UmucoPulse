@@ -82,11 +82,12 @@ header{position:sticky;top:0;z-index:20;background:rgba(248,246,239,.97);backdro
 .btn.success{background:var(--status-success)}
 .hero{position:relative;overflow:hidden;padding:92px 0 78px;min-height:min(78vh,720px);display:flex;align-items:center;background:#092F27;color:var(--umuco-text-light)}
 .hero:after{content:'';position:absolute;right:-90px;top:-90px;width:420px;height:420px;border-radius:50%;border:80px solid rgba(245,197,66,.12);box-shadow:0 0 0 58px rgba(45,128,211,.08);z-index:2;pointer-events:none;opacity:.35}
-.hero-media{position:absolute;inset:0;z-index:0;background:#092F27 center 30%/cover no-repeat}
+.hero-media{position:absolute;inset:0;z-index:0;background:#092F27 center 30%/cover no-repeat;overflow:hidden}
+.hero-media iframe{position:absolute;top:50%;left:50%;width:177.78vh;height:56.25vw;min-width:100%;min-height:100%;border:0;transform:translate(-50%,-50%);pointer-events:none}
 .hero-media video{width:100%;height:100%;object-fit:cover;object-position:center 35%;display:block}
 .hero-veil{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(9,47,39,.94) 0%,rgba(9,47,39,.86) 36%,rgba(9,47,39,.5) 62%,rgba(9,47,39,.22) 100%)}
 .hero-grid{position:relative;z-index:3;display:grid;grid-template-columns:minmax(0,40rem) 1fr;gap:46px;align-items:center;width:100%}
-.hero-copy{max-width:40rem}
+.hero-copy{max-width:40rem;padding-left:clamp(1.5rem,6vw,4.25rem)}
 .eyebrow{text-transform:uppercase;letter-spacing:1.1px;font-size:.78rem;font-weight:900;color:var(--umuco-yellow)}
 .hero h1{font-family:Georgia,'Times New Roman',serif;font-size:clamp(2.7rem,6vw,5.1rem);line-height:.99;margin:.18em 0 .25em;max-width:850px;color:#fff;text-shadow:0 2px 18px rgba(0,0,0,.5)}
 h1{font-family:Georgia,'Times New Roman',serif;font-size:clamp(2rem,4.2vw,3.15rem);line-height:1.08;margin:.18em 0 .25em;max-width:850px;color:var(--umuco-green)}
@@ -97,11 +98,12 @@ h3{margin:.15em 0 .4em;font-weight:800;color:var(--umuco-green)}
 .accent{color:var(--umuco-yellow)}
 .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
 .hero-credit{margin-top:22px;font-size:.78rem;line-height:1.5;color:#e8f0ec;max-width:34rem;text-shadow:0 1px 8px rgba(0,0,0,.55)}
+.hero-credit a{color:#e8f0ec;text-decoration:underline}
 .hero .btn.ghost{background:rgba(9,47,39,.55);color:#fff;border:1px solid rgba(255,255,255,.88)}
 .hero .btn.ghost:hover{background:rgba(9,47,39,.78);color:#fff}
 .hero-art{background:#0B1512;color:#fff;border-radius:28px;padding:0;min-height:0;box-shadow:var(--shadow);position:relative;overflow:hidden}
 .hero-art img{display:block;width:100%;height:auto;object-fit:contain}
-@media (prefers-reduced-motion:reduce){.hero-media video{display:none}}
+@media (prefers-reduced-motion:reduce){.hero-media video,.hero-media iframe{display:none}}
 .section{padding:72px 0}
 .section.white{background:var(--paper2)}
 .section.dark{background:var(--umuco-green-dark);color:#fff}
@@ -172,12 +174,20 @@ th{background:var(--umuco-green-soft);color:var(--umuco-green)}
 .hidden{display:none!important}
 .about-note{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:start}
 .founder-note{background:var(--umuco-green-soft);border-radius:18px;padding:20px;border:1px solid var(--line)}
-.footer{background:#0B1512;color:#e7eee9;padding:44px 0 26px}
-.footer a{color:#d5e8df}
+.footer{position:relative;overflow:hidden;color:#f4f8f6;padding:52px 0 28px;background:#0B1512 url("../assets/intore-dance.jpg") center 32%/cover no-repeat}
+.footer:before{content:'';position:absolute;inset:0;background:linear-gradient(105deg,rgba(11,21,18,.93) 0%,rgba(11,21,18,.86) 42%,rgba(11,21,18,.62) 100%);z-index:0;pointer-events:none}
+.footer .container{position:relative;z-index:1}
+.footer a{color:#e8f4ee}
+.footer p,.footer .help{color:#eef6f2;text-shadow:0 1px 8px rgba(0,0,0,.45)}
+.footer h3{color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.5)}
+.footer .brand{color:#fff}
+.footer .brand em{color:var(--umuco-yellow)}
+.footer .btn.ghost{background:rgba(11,21,18,.45);color:#fff;border:1px solid rgba(255,255,255,.88)}
+.footer .btn.ghost:hover{background:rgba(11,21,18,.7);color:#fff}
 .footer-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:34px}
 .footer input{background:#13231E;border-color:#31483F;color:#fff}
-.footer .help{color:#bad0c5}
-.footer-bottom{border-top:1px solid #274139;margin-top:28px;padding-top:18px;color:#b9ccc2;font-size:.88rem}
+.footer .help{color:#dceee6}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.22);margin-top:28px;padding-top:18px;color:#e4eee9;font-size:.88rem;text-shadow:0 1px 8px rgba(0,0,0,.45)}
 .flash-container{width:min(1160px,92%);margin:16px auto 0}
 .flash{padding:12px 16px;border-radius:12px;margin-bottom:8px;font-weight:700}
 .flash-success{background:var(--umuco-green-soft);color:#0F513F}

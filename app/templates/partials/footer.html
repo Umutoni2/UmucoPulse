@@ -6,7 +6,7 @@
         <p>{{ t.footer_blurb }}</p>
         <div class="actions">
           <a class="btn gold" href="{{ url_for('auth.register') }}">{{ t.share }}</a>
-          <a class="btn ghost" style="color:white;border-color:#8aa99d" href="{{ url_for('main.creators') }}">{{ t.meet_creators }}</a>
+          <a class="btn ghost" href="{{ url_for('main.creators') }}">{{ t.meet_creators }}</a>
         </div>
         <p class="help" style="margin-top:16px">
           <a href="{{ url_for('main.discover') }}">{{ t.discover }}</a> ·
@@ -28,6 +28,6 @@
         </div>
       </form>
     </div>
-    <div class="footer-bottom">{{ t.footer_bottom }}</div>
+    <div class="footer-bottom">{{ t.footer_bottom }} · {{ t.footer_photo_credit }}</div>
   </div>
 </footer>

@@ -2,10 +2,8 @@
 {% block title %}{{ t.home }}{% endblock %}
 {% block content %}
 <section class="hero">
-  <div class="hero-media" aria-hidden="true" style="background-image:url('{{ url_for('static', filename='assets/hero-culture.jpg') }}')">
-    <video autoplay muted loop playsinline poster="{{ url_for('static', filename='assets/hero-culture.jpg') }}">
-      <source src="{{ url_for('static', filename='assets/hero-dance.webm') }}" type="video/webm">
-    </video>
+  <div class="hero-media" style="background-image:url('https://i.ytimg.com/vi/cSPgCqd441E/hqdefault.jpg')">
+    <iframe src="https://www.youtube-nocookie.com/embed/cSPgCqd441E?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=cSPgCqd441E&amp;controls=0&amp;modestbranding=1&amp;playsinline=1&amp;rel=0&amp;disablekb=1&amp;fs=0" title="Inyamibwa Cultural Troupe traditional dance" allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe>
   </div>
   <div class="hero-veil" aria-hidden="true"></div>
   <div class="container hero-grid">
@@ -18,7 +16,7 @@
         <a class="btn" href="{{ url_for('main.creators') }}">{{ t.meet_creators }}</a>
         <a class="btn ghost" href="{{ url_for('auth.register') }}">{{ t.share_story }}</a>
       </div>
-      <p class="hero-credit">{{ t.hero_video_credit }}</p>
+      <p class="hero-credit"><a href="https://www.youtube.com/watch?v=cSPgCqd441E" target="_blank" rel="noopener noreferrer">{{ t.hero_video_credit }}</a></p>
     </div>
   </div>
 </section>
